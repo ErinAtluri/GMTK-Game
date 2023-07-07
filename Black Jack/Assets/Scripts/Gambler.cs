@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using card.cs;
 
-public class Gambler
+public class Gambler : MonoBehaviour 
 {
-    public Card card;
+    public Card[] hand = new Card[2];
+    public int totalScore;
+
 
     // Start is called before the first frame update
     void Start()
