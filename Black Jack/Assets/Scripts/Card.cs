@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Card : MonoBehaviour 
 {
-    public Sprite sprite;
+    public int suit;
     public int value;
+
+    public Card(int suit, int value)
+    {
+        this.suit = suit;
+        this.value = value;
+    }
 
     // Start is called before the first frame update
     void Start()
