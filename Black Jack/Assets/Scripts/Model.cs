@@ -30,6 +30,18 @@ public class Model : MonoBehaviour
         {
         case State.Deal:
             break;
+        case State.Swap:
+            break;
+        case State.Bets:
+            break;
+        case State.Hit:
+            break;
+        case State.Special:
+            break;
+        case State.Payout:
+            break;
+        case State.Flatscreen:
+            break;
         }
     }
 }
