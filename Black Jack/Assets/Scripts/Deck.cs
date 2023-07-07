@@ -50,11 +50,23 @@ public class Deck : MonoBehaviour
         }
     }
 
-    public Card Pop()
+    private Card Pop()
     {
-        Card topCard = new Card(0, 0);
+        Card topCard = deck[0]; // might pass by reference idk
+        deck.RemoveAt(0);
         return topCard;
     }
 
+    public GameObject DealTopCard()
+    {
+        Card card = Pop();
+        GameObject obj = new GameObject(card.suit.ToString() + "_" + card.value.ToString());
+        
+        SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer> ();
+        Sprite sprite = Resources.Load<Sprite> ("Sprites/Cards" + obj.name);
+        spriteRenderer.sprite = sprite;
+
+        return obj;
+    }
 
 }
