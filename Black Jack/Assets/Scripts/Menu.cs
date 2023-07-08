@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private GameObject continueButton;
     public bool isPaused;
 
     void Start()
@@ -15,7 +16,12 @@ public class Menu : MonoBehaviour
         //Time.timeScale = 1f;
         //isPaused = false;
         //Resume();
-
+        if (MoneyStats.LetterPlayed == false)
+        {
+            continueButton.GetComponent<Image>().color = Color.gray;
+            continueButton.GetComponent<Button>().interactable = false;
+            //continueButton.SetActive(false);
+        }
     }
 
     void Update()
@@ -34,12 +40,22 @@ public class Menu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("root");
+        SceneManager.LoadScene("LetterScene");
     }
 
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        MoneyStats.LetterPlayed = true;
+    }
+
+    public void StartOver()
+    {
+        MoneyStats.HouseWallet = 200;
+        MoneyStats.PersonalWallet = 0;
+        MoneyStats.LetterPlayed = false;
+        MoneyStats.Day = 1;
+        SceneManager.LoadScene("root");
     }
 
     public void Credits()
