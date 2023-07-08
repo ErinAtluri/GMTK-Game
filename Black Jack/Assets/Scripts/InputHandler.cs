@@ -5,27 +5,36 @@ using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
-    private Camera _mainCamera;
+    public Camera _mainCamera;
+    public GameObject gotHit;
 
     private void Awake()
     {
-        _mainCamera = Camera.main;
+ 
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _mainCamera = Camera.main;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            //Debug.Log("Mouse Clicked");
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+
+            RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+            if (hit.collider != null)
+            {
+                Debug.Log(hit.collider.gameObject.name);
+                gotHit = hit.collider.gameObject;
+            }
+        }
     }
 
-    public void OnClick(InputAction.CallbackContext context)
-    {
-
-    }
 }

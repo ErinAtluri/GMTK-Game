@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class Model : MonoBehaviour
@@ -20,6 +21,7 @@ public class Model : MonoBehaviour
     [SerializeField] private Flirt flirt;
     [SerializeField] private Gangster gangster;
     [SerializeField] private Rich rich;
+    [SerializeField] private InputHandler inputHandler;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,8 @@ public class Model : MonoBehaviour
         switch (state)
         {
         case State.Deal:
+
+            
             break;
         case State.Swap:
             break;
@@ -47,5 +51,10 @@ public class Model : MonoBehaviour
         case State.Flatscreen:
             break;
         }
+    }
+
+    public GameObject returnHit()
+    {
+        return inputHandler.gotHit;
     }
 }
