@@ -18,9 +18,16 @@ public class Menu : MonoBehaviour
         //Resume();
         if (MoneyStats.LetterPlayed == false)
         {
-            continueButton.GetComponent<Image>().color = Color.gray;
-            continueButton.GetComponent<Button>().interactable = false;
-            //continueButton.SetActive(false);
+            if (continueButton != null)
+            {
+                continueButton.GetComponent<Image>().color = Color.gray;
+                continueButton.GetComponent<Button>().interactable = false;
+                //continueButton.SetActive(false);
+            }
+        } else
+        {
+            continueButton.GetComponent<Image>().color = Color.white;
+            continueButton.GetComponent<Button>().interactable = true;
         }
     }
 
@@ -40,13 +47,13 @@ public class Menu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("LetterScene");
+        SceneManager.LoadScene("root");
     }
 
     public void NextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         MoneyStats.LetterPlayed = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void StartOver()
@@ -55,7 +62,7 @@ public class Menu : MonoBehaviour
         MoneyStats.PersonalWallet = 0;
         MoneyStats.LetterPlayed = false;
         MoneyStats.Day = 1;
-        SceneManager.LoadScene("root");
+        SceneManager.LoadScene("LetterScene");
     }
 
     public void Credits()
@@ -77,7 +84,7 @@ public class Menu : MonoBehaviour
 
     public void ReturnToMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void ExitGame()
