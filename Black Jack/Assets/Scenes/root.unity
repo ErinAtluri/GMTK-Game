@@ -1511,9 +1511,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431832902d8c3614b9eba0c4c4f454d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flirt: {fileID: 1242043113}
   gangster: {fileID: 1621880768}
   rich: {fileID: 962004585}
+  flirt: {fileID: 1242043113}
   inputHandler: {fileID: 1866633734}
 --- !u!1 &1621880767
 GameObject:
