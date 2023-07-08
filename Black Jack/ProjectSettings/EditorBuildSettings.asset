@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 320b8583b2e396046b42f0ff149236f5
   - enabled: 1
+    path: Assets/Scenes/LetterScene.unity
+    guid: 0d7d8b15909098c45a6e25bb33ce9664
+  - enabled: 1
     path: Assets/Scenes/root.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
