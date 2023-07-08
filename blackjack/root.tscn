@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Art/bg.png" type="Texture" id=1]
 [ext_resource path="res://Gambler/gangster.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Fonts/Roboto-Black.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Assets/Art/hard light 45 cone.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Art/table.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Fonts/josefin-sans/JosefinSans-Regular.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="DynamicFont" id=2]
 size = 60
@@ -17,6 +18,10 @@ font_data = ExtResource( 7 )
 [sub_resource type="DynamicFont" id=1]
 size = 60
 font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 60
+font_data = ExtResource( 10 )
 
 [node name="root" type="Node2D"]
 script = ExtResource( 5 )
@@ -274,12 +279,33 @@ margin_top = 883.0
 margin_right = 527.0
 margin_bottom = 1037.0
 
+[node name="payout_ui" type="Node2D" parent="."]
+visible = false
+
+[node name="winners_bg" type="Sprite" parent="payout_ui"]
+
+[node name="winners_label" type="Label" parent="payout_ui"]
+margin_left = 89.0
+margin_top = 596.0
+margin_right = 319.0
+margin_bottom = 656.0
+custom_fonts/font = SubResource( 3 )
+text = "Winners:"
+
+[node name="next_round_button" type="Button" parent="payout_ui"]
+margin_left = 1475.0
+margin_top = 890.0
+margin_right = 1859.0
+margin_bottom = 1018.0
+text = "NEXT ROUND"
+
 [connection signal="pressed" from="deal_ui/deck_h_box/first/first_button" to="." method="_on_first_button_pressed"]
 [connection signal="pressed" from="deal_ui/deck_h_box/second/second_button" to="." method="_on_second_button_pressed"]
 [connection signal="pressed" from="deal_ui/deck_h_box/third/third_button" to="." method="_on_third_button_pressed"]
 [connection signal="pressed" from="swap_ui/swap_button" to="." method="_on_swap_button_pressed"]
 [connection signal="pressed" from="swap_ui/dont_swap_button" to="." method="_on_dont_swap_button_pressed"]
 [connection signal="pressed" from="hit_ui/stand_button" to="." method="_on_stand_button_pressed"]
+[connection signal="pressed" from="payout_ui/next_round_button" to="." method="_on_next_round_button_pressed"]
 
 [editable path="patrons/gangster"]
 [editable path="patrons/flirt"]

@@ -35,12 +35,18 @@ func _ready():
 		patron.connect("stand", self, "patron_stand")
 		
 	$dealer.connect("deal", self, "deal_self")
+	
+	house_wallet = get_node("/root/Globals").house
+	personal_wallet = get_node("/root/Globals").personal
 		
 	set_deck()
 	
 	set_top_three()
 	de_gayify_the_cards()
 	$deal_ui/deck_h_box/first.modulate = WHITE
+	
+	$base_ui/house_wallet.text = "$" + str(house_wallet)
+	$base_ui/personal_wallet.text = "$" + str(personal_wallet)
 	
 func _process(delta):
 	if state == State.Hit and !hit:
@@ -217,8 +223,7 @@ func payout() -> void:
 				house_wallet += 200
 				if patron_doubled[i] == 400:
 					house_wallet += 200
-					
-			if patron_scores[i] > dealer_score:
+			elif patron_scores[i] > dealer_score:
 				house_wallet -= 100
 				if patron_doubled[i] == 400:
 					house_wallet -= 100
@@ -253,6 +258,11 @@ func payout() -> void:
 		
 	$base_ui/house_wallet.text = "$" + str(house_wallet)
 	$base_ui/personal_wallet.text = "$" + str(personal_wallet)
+	
+	$payout_ui/winners_label.text = "Winners:\n"
+	for winner in winners:
+		$payout_ui/winners_label.text += winner + "\n"
+	$payout_ui.show()
 	
 func _on_first_button_pressed():
 	de_gayify_the_cards()
@@ -341,3 +351,8 @@ func _on_stand_button_pressed():
 					turn = "gangster"
 				_:
 					pass
+					
+func _on_next_round_button_pressed():
+	get_node("/root/Globals").house = house_wallet
+	get_node("/root/Globals").personal = personal_wallet
+	get_tree().reload_current_scene()
