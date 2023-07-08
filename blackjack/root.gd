@@ -139,6 +139,8 @@ func patron_stand(patron) -> void:
 	
 	if stand >= 3 and dealer_stand:
 		state = State.Payout
+		$deal_ui.hide()
+		$hit_ui.hide()
 		payout()
 	else:
 		match turn:
@@ -178,27 +180,66 @@ func deal_self() -> void:
 func payout() -> void:
 	var patron_doubled : PoolIntArray = PoolIntArray([])
 	var patron_scores : PoolIntArray = PoolIntArray([])
-	patron_scores[0] = $patrons/gangster.get_score()
-	patron_scores[1] = $patrons/flirt.get_score()
-	patron_scores[2] = $patrons/rich.get_score()
-	patron_doubled[0] = $patrons/gangster.bet
-	patron_doubled[1] = $patrons/flirt.bet
-	patron_doubled[2] = $patrons/rich.bet
+	var winners : PoolStringArray = PoolStringArray([])
+	patron_scores.append($patrons/gangster.get_score())
+	patron_scores.append($patrons/flirt.get_score())
+	patron_scores.append($patrons/rich.get_score())
+	patron_doubled.append($patrons/gangster.bet)
+	patron_doubled.append($patrons/flirt.bet)
+	patron_doubled.append($patrons/rich.bet)
 	var dealer_score : int = 0
 	
 	for child in $dealer.get_node("cards").get_children():
 		dealer_score += child.value
 		
 	while dealer_score > 21:
-		for child in $cards.get_children():
+		for child in $dealer.get_node("cards").get_children():
 			if child.value == 11:
 				dealer_score -= 10
 				
 	for i in range(3):
-		if patron_scores[i] > 21:
-			house_wallet += 200
-		if patron_doubled[i] == 400:
-			house_wallet += 200
+		if dealer_score > 21:
+			if patron_scores[i] > 21:
+				house_wallet += 200
+				if patron_doubled[i] == 400:
+					house_wallet += 200
+			else:
+				match i:
+					0:
+						winners.append("gangster")
+					1:
+						winners.append("flirt")
+					2:
+						winners.append("rich")
+		else:
+			if patron_scores[i] > 21:
+				house_wallet += 200
+				if patron_doubled[i] == 400:
+					house_wallet += 200
+					
+			if patron_scores[i] > dealer_score:
+				house_wallet -= 100
+				if patron_doubled[i] == 400:
+					house_wallet -= 100
+				match i:
+					0:
+						winners.append("gangster")
+					1:
+						winners.append("flirt")
+					2:
+						winners.append("rich")
+			else:
+				house_wallet += 200
+				
+	if "gangster" in winners:
+		pass
+	if "flirt" in winners:
+		pass
+	if "rich" in winners:
+		pass
+		
+	$base_ui/house_wallet.text = "$" + str(house_wallet)
+	$base_ui/personal_wallet.text = "$" + str(personal_wallet)
 	
 func _on_first_button_pressed():
 	de_gayify_the_cards()
@@ -267,3 +308,21 @@ func _on_dont_swap_button_pressed():
 func _on_stand_button_pressed():
 	if turn == "dealer":
 		dealer_stand = true
+		
+		if stand >= 3 and dealer_stand:
+			state = State.Payout
+			$deal_ui.hide()
+			$hit_ui.hide()
+			payout()
+		else:
+			match turn:
+				"gangster":
+					turn = "flirt"
+				"flirt":
+					turn = "rich"
+				"rich":
+					turn = "dealer"
+				"dealer":
+					turn = "gangster"
+				_:
+					pass
