@@ -136,11 +136,11 @@ func patron_clicked(patron : Object) -> void:
 					pass
 		
 func patron_hit(patron) -> void:
-	patron.get_node("dialog").text = "hit"
+	patron.bark("hit")
 	hit = true
 	
 func patron_stand(patron) -> void:
-	patron.get_node("dialog").text = "stand"
+	patron.bark("stand")
 	hit = false
 	stand += 1
 	
@@ -355,4 +355,5 @@ func _on_stand_button_pressed():
 func _on_next_round_button_pressed():
 	get_node("/root/Globals").house = house_wallet
 	get_node("/root/Globals").personal = personal_wallet
+	get_node("/root/Globals").roun_d += 1
 	get_tree().reload_current_scene()

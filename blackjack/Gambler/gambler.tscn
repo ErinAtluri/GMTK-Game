@@ -74,10 +74,21 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="dialog" type="Label" parent="."]
+[node name="bark" type="Node2D" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 14.0
+
+[node name="tween" type="Tween" parent="bark"]
+
+[node name="pos_i" type="Position2D" parent="bark"]
+
+[node name="pos_f" type="Position2D" parent="bark"]
+
+[node name="bark_bg" type="Sprite" parent="bark"]
+centered = false
+
+[node name="dialog" type="Label" parent="bark"]
+margin_right = 232.0
+margin_bottom = 60.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Yee haw"

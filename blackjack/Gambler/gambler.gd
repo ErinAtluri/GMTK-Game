@@ -74,7 +74,14 @@ func show_expression(expression : String) -> void:
 		$expressions.get_node(expression).show()
 		
 func bark(dialog : String) -> void:
-	pass
+	$bark.show()
+	$bark/tween.interpolate_property($bark, "global_position", \
+		$bark/pos_i.global_position, $bark/pos_f.global_position, \
+			1.0, Tween.TRANS_ELASTIC)
+	$bark/tween.start()
+	
+func hide_bark() -> void:
+	$bark.hide()
 	
 func _on_button_pressed():
 	emit_signal("clicked", self)

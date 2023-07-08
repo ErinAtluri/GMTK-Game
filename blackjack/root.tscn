@@ -91,12 +91,11 @@ margin_top = 47.0
 margin_right = 262.0
 margin_bottom = 364.0
 
-[node name="dialog" parent="patrons/gangster" index="8"]
-visible = true
-margin_left = 202.0
-margin_top = 47.0
-margin_right = 434.0
-margin_bottom = 107.0
+[node name="pos_i" parent="patrons/gangster/bark" index="1"]
+position = Vector2( 165, 166 )
+
+[node name="pos_f" parent="patrons/gangster/bark" index="2"]
+position = Vector2( 240, 66 )
 
 [node name="flirt" parent="patrons" instance=ExtResource( 3 )]
 position = Vector2( 771, 164 )
@@ -130,13 +129,6 @@ margin_left = 33.0
 margin_top = 13.0
 margin_right = 416.0
 margin_bottom = 411.0
-
-[node name="dialog" parent="patrons/flirt" index="6"]
-visible = true
-margin_left = 249.0
-margin_top = 6.0
-margin_right = 481.0
-margin_bottom = 66.0
 
 [node name="rich" parent="patrons" instance=ExtResource( 4 )]
 position = Vector2( 1325, 290 )
@@ -173,13 +165,6 @@ margin_left = -108.0
 margin_top = -76.0
 margin_right = 163.0
 margin_bottom = 374.0
-
-[node name="dialog" parent="patrons/rich" index="6"]
-visible = true
-margin_left = 195.0
-margin_top = -7.0
-margin_right = 427.0
-margin_bottom = 53.0
 
 [node name="dealer" parent="." instance=ExtResource( 6 )]
 
