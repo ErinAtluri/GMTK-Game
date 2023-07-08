@@ -29,6 +29,7 @@ func _ready():
 	randomize()
 	
 	for patron in $patrons.get_children():
+		patron.show_expression("not_looking")
 		patron.connect("clicked", self, "patron_clicked")
 		patron.connect("hit", self, "patron_hit")
 		patron.connect("stand", self, "patron_stand")
@@ -193,8 +194,9 @@ func payout() -> void:
 		dealer_score += child.value
 		
 	for child in $dealer.get_node("cards").get_children():
-		if child.value == 11 and dealer_score > 21:
-			dealer_score -= 10
+		for grandchild in $dealer.get_node("cards").get_children():
+			if child.value == 11 and dealer_score > 21:
+				dealer_score -= 10
 				
 	for i in range(3):
 		if dealer_score > 21:
@@ -231,11 +233,23 @@ func payout() -> void:
 				house_wallet += 200
 				
 	if "gangster" in winners:
-		pass
+		$patrons/gangster.show_expression("win")
+	else:
+		$patrons/gangster.show_expression("lose")
 	if "flirt" in winners:
-		pass
+		$patrons/flirt.show_expression("win")
+	else:
+		$patrons/flirt.show_expression("lose")
 	if "rich" in winners:
-		pass
+		if patron_doubled[2] == 400:
+			$patrons/rich.show_expression("win_2")
+		else:
+			$patrons/rich.show_expression("win")
+	else:
+		if patron_doubled[2] == 400:
+			$patrons/rich.show_expression("lose_2")
+		else:
+			$patrons/rich.show_expression("lose")
 		
 	$base_ui/house_wallet.text = "$" + str(house_wallet)
 	$base_ui/personal_wallet.text = "$" + str(personal_wallet)
@@ -297,6 +311,8 @@ func _on_dont_swap_button_pressed():
 		child.calc_double_down()
 		
 	state = State.Hit
+	for patron in $patrons.get_children():
+		patron.show_expression("looking")
 	turn = "gangster"
 	hit = false
 	dealer_stand = false

@@ -22,9 +22,11 @@ func get_score() -> int:
 	for child in $cards.get_children():
 		score += child.value
 		
+	
 	for child in $cards.get_children():
-		if child.value == 11 and score > 21:
-			score -= 10
+		for grandchild in $cards.get_children():
+			if grandchild.value == 11 and score > 21:
+				score -= 10
 		
 	return score
 	
@@ -70,6 +72,9 @@ func show_expression(expression : String) -> void:
 	if $expressions.has_node(expression):
 		hide_expressions()
 		$expressions.get_node(expression).show()
+		
+func bark(dialog : String) -> void:
+	pass
 	
 func _on_button_pressed():
 	emit_signal("clicked", self)

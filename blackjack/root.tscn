@@ -57,6 +57,10 @@ scale = Vector2( 0.587432, 0.587989 )
 position = Vector2( -100, 30 )
 scale = Vector2( 0.580981, 0.580102 )
 
+[node name="expressions" parent="patrons/gangster" index="3"]
+position = Vector2( -100, 30 )
+scale = Vector2( 0.58, 0.58 )
+
 [node name="cards" parent="patrons/gangster" index="5"]
 margin_left = -63.0
 margin_top = -58.0
@@ -83,6 +87,7 @@ margin_right = 262.0
 margin_bottom = 364.0
 
 [node name="dialog" parent="patrons/gangster" index="8"]
+visible = true
 margin_left = 202.0
 margin_top = 47.0
 margin_right = 434.0
@@ -93,6 +98,9 @@ position = Vector2( 771, 164 )
 
 [node name="image" parent="patrons/flirt" index="0"]
 scale = Vector2( 0.586476, 0.598093 )
+
+[node name="expressions" parent="patrons/flirt" index="1"]
+scale = Vector2( 0.586, 0.598 )
 
 [node name="cards" parent="patrons/flirt" index="3"]
 margin_top = -96.0
@@ -119,6 +127,7 @@ margin_right = 416.0
 margin_bottom = 411.0
 
 [node name="dialog" parent="patrons/flirt" index="6"]
+visible = true
 margin_left = 249.0
 margin_top = 6.0
 margin_right = 481.0
@@ -130,6 +139,10 @@ position = Vector2( 1325, 290 )
 [node name="image" parent="patrons/rich" index="0"]
 position = Vector2( -184, -117 )
 scale = Vector2( 0.655052, 0.652053 )
+
+[node name="expressions" parent="patrons/rich" index="1"]
+position = Vector2( -184, -117 )
+scale = Vector2( 0.655, 0.655 )
 
 [node name="cards" parent="patrons/rich" index="3"]
 margin_left = -142.0
@@ -157,6 +170,7 @@ margin_right = 163.0
 margin_bottom = 374.0
 
 [node name="dialog" parent="patrons/rich" index="6"]
+visible = true
 margin_left = 195.0
 margin_top = -7.0
 margin_right = 427.0
