@@ -176,7 +176,29 @@ func deal_self() -> void:
 		turn = "gangster"
 		
 func payout() -> void:
-	pass
+	var patron_doubled : PoolIntArray = PoolIntArray([])
+	var patron_scores : PoolIntArray = PoolIntArray([])
+	patron_scores[0] = $patrons/gangster.get_score()
+	patron_scores[1] = $patrons/flirt.get_score()
+	patron_scores[2] = $patrons/rich.get_score()
+	patron_doubled[0] = $patrons/gangster.bet
+	patron_doubled[1] = $patrons/flirt.bet
+	patron_doubled[2] = $patrons/rich.bet
+	var dealer_score : int = 0
+	
+	for child in $dealer.get_node("cards").get_children():
+		dealer_score += child.value
+		
+	while dealer_score > 21:
+		for child in $cards.get_children():
+			if child.value == 11:
+				dealer_score -= 10
+				
+	for i in range(3):
+		if patron_scores[i] > 21:
+			house_wallet += 200
+		if patron_doubled[i] == 400:
+			house_wallet += 200
 	
 func _on_first_button_pressed():
 	de_gayify_the_cards()
