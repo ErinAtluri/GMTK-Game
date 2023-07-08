@@ -160,3 +160,6 @@ func _on_dont_swap_button_pressed():
 	$dealer.get_node("cards").add_child(card)
 	$swap_ui.hide()
 	state = State.Bet
+	
+	for child in $patrons.get_children():
+		child.place_bet()

@@ -13,7 +13,7 @@ func _ready():
 	pos_2 = $positions/pos_2.position
 	
 func place_bet():
-	pass
+	$bets.show()
 
 func _on_button_pressed():
 	emit_signal("clicked", self)
