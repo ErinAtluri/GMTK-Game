@@ -1,42 +1,108 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Fonts/josefin-sans/JosefinSans-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Ui/Quit Button.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Ui/Credit Button.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Ui/Play Button.png" type="Texture" id=4]
+[ext_resource path="res://Main Menu.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Ui/Back Arrow.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
-size = 200
+size = 198
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 118
 font_data = ExtResource( 1 )
 
 [node name="Main Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 2172, 1007 )
+script = ExtResource( 5 )
 
-[node name="Button" type="Button" parent="."]
-margin_left = 1234.0
-margin_top = 469.0
-margin_right = 1534.0
-margin_bottom = 583.0
+[node name="Play Button" type="Button" parent="."]
+margin_left = 1370.0
+margin_top = 437.0
+margin_right = 1682.0
+margin_bottom = 743.0
 rect_pivot_offset = Vector2( 0, 289 )
+icon = ExtResource( 4 )
+flat = true
 
-[node name="Button2" type="Button" parent="."]
-margin_left = 977.0
-margin_top = 739.0
-margin_right = 1277.0
-margin_bottom = 853.0
+[node name="Credits Button" type="Button" parent="."]
+margin_left = 1113.0
+margin_top = 601.0
+margin_right = 1425.0
+margin_bottom = 907.0
 rect_pivot_offset = Vector2( -2009, -808 )
+icon = ExtResource( 3 )
+flat = true
 
-[node name="Button3" type="Button" parent="."]
-margin_left = 1462.0
-margin_top = 736.0
-margin_right = 1762.0
-margin_bottom = 850.0
+[node name="Quit Button" type="Button" parent="."]
+margin_left = 1472.0
+margin_top = 724.0
+margin_right = 1784.0
+margin_bottom = 1030.0
 rect_pivot_offset = Vector2( 0, 289 )
+icon = ExtResource( 2 )
+flat = true
 
 [node name="Label" type="Label" parent="."]
-margin_right = 937.0
-margin_bottom = 446.0
+margin_left = 80.0
+margin_top = 88.0
+margin_right = 1017.0
+margin_bottom = 534.0
 rect_pivot_offset = Vector2( -602, 0 )
 custom_fonts/font = SubResource( 1 )
-text = "TITLE"
+text = "Dealer's
+Choice"
 align = 1
 valign = 1
+
+[node name="Credit Menu" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="BG" type="ColorRect" parent="Credit Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.215686, 0.231373, 0.254902, 0.956863 )
+
+[node name="Credits" type="Label" parent="Credit Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -602, 0 )
+custom_fonts/font = SubResource( 2 )
+text = "Credits
+
+Jt
+Ena
+Nolan
+Jonan
+Erin"
+align = 1
+valign = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Credit Menu"]
+anchor_bottom = 1.0
+margin_top = 774.0
+margin_right = 376.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credit Menu/CenterContainer"]
+margin_left = 32.0
+margin_right = 344.0
+margin_bottom = 306.0
+
+[node name="Back" type="Button" parent="Credit Menu/CenterContainer/VBoxContainer"]
+margin_right = 312.0
+margin_bottom = 306.0
+icon = ExtResource( 6 )
+flat = true
+
+[connection signal="pressed" from="Play Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Play Button" to="." method="_on_Play_Button_pressed"]
+[connection signal="pressed" from="Credits Button" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="Credits Button" to="." method="_on_Credits_Button_pressed"]
+[connection signal="pressed" from="Quit Button" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="Quit Button" to="." method="_on_Quit_Button_pressed"]
+[connection signal="pressed" from="Credit Menu/CenterContainer/VBoxContainer/Back" to="." method="_on_Back_pressed"]
