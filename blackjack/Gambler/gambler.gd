@@ -3,6 +3,7 @@ extends Node2D
 var cards : Array = []
 var score : int = 0
 var bet : int = 0
+var hit_once : bool = false
 
 var pos_1 : Vector2
 var pos_2 : Vector2
@@ -37,6 +38,7 @@ func place_bet() -> void:
 	
 func calc_double_down() -> bool:
 	get_score()
+	hit_once = false
 	
 	if score >= 10 and score <= 12:
 		$bets/bet_2.show()
@@ -48,6 +50,7 @@ func calc_double_down() -> bool:
 	
 func hit() -> void:
 	get_score()
+	hit_once = true
 	
 	if score < 16:
 		emit_signal("hit", self)
