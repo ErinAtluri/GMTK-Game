@@ -8,6 +8,7 @@ enum State {
 	Swap,
 	Bet,
 	Hit,
+	Payout,
 }
 
 var card_obj = preload("res://Card/card.tscn")
@@ -18,6 +19,7 @@ var state = State.Deal
 var selected_card : int = 0
 var turn : String = "gangster"
 var hit : bool = false
+var dealer_stand : bool = false
 var stand : int = 0
 
 var house_wallet : int = 200
@@ -41,15 +43,14 @@ func _ready():
 	
 func _process(delta):
 	if state == State.Hit and !hit:
-		match turn:
-			"gangster":
-				$patrons/gangster.hit()
-			"flirt":
-				$patrons/flirt.hit()
-			"rich":
-				$patrons/rich.hit()
-			_:
-				pass
+		if turn == "dealer":
+			return
+			
+		var patron = $patrons.get_node(turn)
+		if patron.bet == 400 and patron.hit_once:
+			patron_stand(patron)
+		else:
+			patron.hit()
 	
 func set_deck() -> void:
 	for i in range(13):
@@ -83,7 +84,6 @@ func deal_card(patron) -> void:
 	var card = deck[selected_card].duplicate()
 	card.suit = deck[selected_card].suit
 	card.value = deck[selected_card].value
-	# card.position = pos
 	deck.remove(selected_card)
 	patron.get_node("cards").add_child(card)
 	card_count += 1
@@ -124,7 +124,7 @@ func patron_clicked(patron : Object) -> void:
 					turn = "rich"
 				"rich":
 					deal_card($patrons/rich)
-					turn = "gangster"
+					turn = "dealer"
 				_:
 					pass
 		
@@ -137,8 +137,9 @@ func patron_stand(patron) -> void:
 	hit = false
 	stand += 1
 	
-	if stand >= 3:
-		pass
+	if stand >= 3 and dealer_stand:
+		state = State.Payout
+		payout()
 	else:
 		match turn:
 			"gangster":
@@ -146,24 +147,36 @@ func patron_stand(patron) -> void:
 			"flirt":
 				turn = "rich"
 			"rich":
+				turn = "dealer"
+			"dealer":
 				turn = "gangster"
 			_:
 				pass
 		
 func deal_self() -> void:
-	if state != State.Deal:
-		return
-		
-	if card_count == 3:
+	if state == State.Deal:
+		if card_count == 3:
+			var card = deck[selected_card].duplicate()
+			card.suit = deck[selected_card].suit
+			card.value = deck[selected_card].value
+			deck.remove(selected_card)
+			$dealer.get_node("cards").add_child(card)
+			set_top_three()
+			card_count += 1
+			
+		elif card_count == 7:
+			pass
+	elif state == State.Hit and turn == "dealer":
 		var card = deck[selected_card].duplicate()
-		card.get_node("sprite").position = $dealer.pos_1
+		card.suit = deck[selected_card].suit
+		card.value = deck[selected_card].value
 		deck.remove(selected_card)
 		$dealer.get_node("cards").add_child(card)
 		set_top_three()
-		card_count += 1
+		turn = "gangster"
 		
-	elif card_count == 7:
-		pass
+func payout() -> void:
+	pass
 	
 func _on_first_button_pressed():
 	de_gayify_the_cards()
@@ -210,7 +223,8 @@ func _on_swap_button_pressed():
 	
 func _on_dont_swap_button_pressed():
 	var card = deck[selected_card].duplicate()
-	card.get_node("sprite").position = $dealer.pos_2
+	card.suit = deck[selected_card].suit
+	card.value = deck[selected_card].value
 	deck.remove(selected_card)
 	$dealer.get_node("cards").add_child(card)
 	$swap_ui.hide()
@@ -223,5 +237,11 @@ func _on_dont_swap_button_pressed():
 	state = State.Hit
 	turn = "gangster"
 	hit = false
+	dealer_stand = false
 	stand = 0
+	$hit_ui.show()
 	$deal_ui.show()
+	
+func _on_stand_button_pressed():
+	if turn == "dealer":
+		dealer_stand = true

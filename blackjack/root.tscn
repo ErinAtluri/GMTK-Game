@@ -231,11 +231,21 @@ margin_top = 846.0
 margin_right = 1864.0
 margin_bottom = 1008.0
 
+[node name="hit_ui" type="Node2D" parent="."]
+visible = false
+
+[node name="stand_button" type="Button" parent="hit_ui"]
+margin_left = 284.0
+margin_top = 883.0
+margin_right = 527.0
+margin_bottom = 1037.0
+
 [connection signal="pressed" from="deal_ui/deck_h_box/first/first_button" to="." method="_on_first_button_pressed"]
 [connection signal="pressed" from="deal_ui/deck_h_box/second/second_button" to="." method="_on_second_button_pressed"]
 [connection signal="pressed" from="deal_ui/deck_h_box/third/third_button" to="." method="_on_third_button_pressed"]
 [connection signal="pressed" from="swap_ui/swap_button" to="." method="_on_swap_button_pressed"]
 [connection signal="pressed" from="swap_ui/dont_swap_button" to="." method="_on_dont_swap_button_pressed"]
+[connection signal="pressed" from="hit_ui/stand_button" to="." method="_on_stand_button_pressed"]
 
 [editable path="patrons/gangster"]
 [editable path="patrons/flirt"]
