@@ -16,6 +16,10 @@ public class Model : MonoBehaviour
     }
 
     private State state = State.Deal;
+    private Deck deck = new Deck();
+    [SerializeField] private Flirt flirt;
+    [SerializeField] private Gangster gangster;
+    [SerializeField] private Rich rich;
 
     // Start is called before the first frame update
     void Start()
