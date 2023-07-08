@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 public class Gambler : MonoBehaviour 
 {
     Camera m_Camera;
-    public Card[] hand = new Card[2];
-    public int totalScore;
+    private List<Card> hand;
 
     void OnMouseDown()
     {
@@ -33,5 +32,25 @@ public class Gambler : MonoBehaviour
                 // Use the hit variable to determine what was clicked on.
             }
         }
+    }
+
+    public void DealCard(Card card)
+    {
+        hand.Add(card);
+    }
+
+    public bool HandFull()
+    {
+        if (hand.Count == 2)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public int GetScore()
+    {
+        return 0;
     }
 }

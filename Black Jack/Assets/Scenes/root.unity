@@ -854,10 +854,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1611523a38c9ebb40917f7c42b2384d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand:
-  - {fileID: 0}
-  - {fileID: 0}
-  totalScore: 0
 --- !u!61 &962004587
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1205,10 +1201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed7058f0ec77be44afe1e92c954e18c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand:
-  - {fileID: 0}
-  - {fileID: 0}
-  totalScore: 0
 --- !u!212 &1143285314
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1375,10 +1367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d27a69ed9edc1d49bb65306914d5e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand:
-  - {fileID: 0}
-  - {fileID: 0}
-  totalScore: 0
 --- !u!50 &1242043114
 Rigidbody2D:
   serializedVersion: 4
@@ -1526,7 +1514,7 @@ MonoBehaviour:
   flirt: {fileID: 1242043113}
   gangster: {fileID: 1621880768}
   rich: {fileID: 962004585}
-  inputHandler: {fileID: 0}
+  inputHandler: {fileID: 1866633734}
 --- !u!1 &1621880767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1559,10 +1547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed7058f0ec77be44afe1e92c954e18c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand:
-  - {fileID: 0}
-  - {fileID: 0}
-  totalScore: 0
 --- !u!212 &1621880769
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1722,4 +1706,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 1488526281}
-  gotHit: {fileID: 0}
+  whomHit: 0
+  clicked: 0

@@ -50,7 +50,7 @@ public class Deck : MonoBehaviour
         }
     }
 
-    private Card Pop()
+    public Card Pop()
     {
         Card topCard = deck[0]; // might pass by reference idk
         deck.RemoveAt(0);
