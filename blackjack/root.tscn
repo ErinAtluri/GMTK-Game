@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/mock.png" type="Texture" id=1]
 [ext_resource path="res://Gambler/gangster.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://root.gd" type="Script" id=5]
 [ext_resource path="res://dealer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Fonts/Roboto-Black.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://icon.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=2]
 size = 60
@@ -29,38 +30,117 @@ centered = false
 [node name="gangster" parent="patrons" instance=ExtResource( 2 )]
 position = Vector2( 452, 291 )
 
-[node name="sprite" parent="patrons/gangster/bets" index="0"]
-position = Vector2( 232, 379 )
+[node name="mafia" parent="patrons/gangster" index="0"]
+position = Vector2( -263, -243 )
+scale = Vector2( 0.671706, 0.57275 )
 
-[node name="label" parent="patrons/gangster/bets" index="1"]
-margin_left = 170.0
-margin_top = 310.0
-margin_right = 311.0
-margin_bottom = 370.0
+[node name="gun" parent="patrons/gangster" index="1"]
+position = Vector2( -182, -111 )
+scale = Vector2( 0.587432, 0.587989 )
 
-[node name="rich" parent="patrons" instance=ExtResource( 4 )]
-position = Vector2( 885, 203 )
+[node name="image" parent="patrons/gangster" index="2"]
+position = Vector2( -100, 30 )
+scale = Vector2( 0.580981, 0.580102 )
 
-[node name="sprite" parent="patrons/rich/bets" index="0"]
-position = Vector2( 61, 422 )
+[node name="cards" parent="patrons/gangster" index="5"]
+margin_left = -63.0
+margin_top = -58.0
+margin_right = 308.0
+margin_bottom = 102.0
+size_flags_horizontal = 3
 
-[node name="label" parent="patrons/rich/bets" index="1"]
-margin_left = 39.0
-margin_top = 360.0
-margin_right = 180.0
-margin_bottom = 420.0
+[node name="bet" parent="patrons/gangster/bets" index="0"]
+position = Vector2( 169, 362 )
+
+[node name="bet_2" parent="patrons/gangster/bets" index="1"]
+position = Vector2( 241, 381 )
+
+[node name="label" parent="patrons/gangster/bets" index="2"]
+margin_left = 160.0
+margin_top = 308.0
+margin_right = 301.0
+margin_bottom = 368.0
+
+[node name="button" parent="patrons/gangster" index="7"]
+margin_left = 18.0
+margin_top = 47.0
+margin_right = 262.0
+margin_bottom = 364.0
+
+[node name="dialog" parent="patrons/gangster" index="8"]
+margin_left = 202.0
+margin_top = 47.0
+margin_right = 434.0
+margin_bottom = 107.0
 
 [node name="flirt" parent="patrons" instance=ExtResource( 3 )]
-position = Vector2( 1338, 265 )
+position = Vector2( 771, 164 )
 
-[node name="sprite" parent="patrons/flirt/bets" index="0"]
-position = Vector2( -129, 382 )
+[node name="image" parent="patrons/flirt" index="0"]
+scale = Vector2( 0.586476, 0.598093 )
 
-[node name="label" parent="patrons/flirt/bets" index="1"]
-margin_left = -131.0
-margin_top = 320.0
-margin_right = 10.0
-margin_bottom = 380.0
+[node name="cards" parent="patrons/flirt" index="3"]
+margin_top = -96.0
+margin_right = 430.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+
+[node name="bet" parent="patrons/flirt/bets" index="0"]
+position = Vector2( 132, 431 )
+
+[node name="bet_2" parent="patrons/flirt/bets" index="1"]
+position = Vector2( 200, 452 )
+
+[node name="label" parent="patrons/flirt/bets" index="2"]
+margin_left = 148.0
+margin_top = 398.0
+margin_right = 289.0
+margin_bottom = 458.0
+
+[node name="button" parent="patrons/flirt" index="5"]
+margin_left = 33.0
+margin_top = 13.0
+margin_right = 416.0
+margin_bottom = 411.0
+
+[node name="dialog" parent="patrons/flirt" index="6"]
+margin_left = 372.0
+margin_top = 17.0
+margin_right = 604.0
+margin_bottom = 77.0
+
+[node name="rich" parent="patrons" instance=ExtResource( 4 )]
+position = Vector2( 1325, 290 )
+
+[node name="image" parent="patrons/rich" index="0"]
+visible = false
+scale = Vector2( 3.32813, 5.5 )
+texture = ExtResource( 8 )
+
+[node name="cards" parent="patrons/rich" index="3"]
+margin_left = -88.0
+margin_top = -108.0
+margin_right = 357.0
+margin_bottom = 67.0
+size_flags_horizontal = 3
+
+[node name="bet" parent="patrons/rich/bets" index="0"]
+position = Vector2( -114, 318 )
+
+[node name="bet_2" parent="patrons/rich/bets" index="1"]
+position = Vector2( -48, 336 )
+
+[node name="label" parent="patrons/rich/bets" index="2"]
+margin_left = -104.0
+margin_top = 284.0
+margin_right = 37.0
+margin_bottom = 344.0
+
+[node name="dialog" parent="patrons/rich" index="6"]
+margin_left = 220.0
+margin_top = 23.0
+margin_right = 452.0
+margin_bottom = 83.0
 
 [node name="dealer" parent="." instance=ExtResource( 6 )]
 
@@ -102,8 +182,8 @@ size_flags_horizontal = 3
 [node name="first_button" type="Button" parent="deal_ui/deck_h_box/first"]
 anchor_right = 0.166
 anchor_bottom = 0.17
-margin_right = 1571.38
-margin_bottom = 2679.4
+margin_right = 2642.74
+margin_bottom = 3721.8
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
@@ -115,8 +195,8 @@ margin_bottom = 4460.0
 size_flags_horizontal = 3
 
 [node name="second_button" type="Button" parent="deal_ui/deck_h_box/second"]
-margin_right = 2312.0
-margin_bottom = 3100.0
+margin_right = 3179.0
+margin_bottom = 4520.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
@@ -128,8 +208,8 @@ margin_bottom = 4460.0
 size_flags_horizontal = 3
 
 [node name="third_button" type="Button" parent="deal_ui/deck_h_box/third"]
-margin_right = 2024.0
-margin_bottom = 3180.0
+margin_right = 3338.0
+margin_bottom = 4500.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
@@ -158,5 +238,5 @@ margin_bottom = 1008.0
 [connection signal="pressed" from="swap_ui/dont_swap_button" to="." method="_on_dont_swap_button_pressed"]
 
 [editable path="patrons/gangster"]
-[editable path="patrons/rich"]
 [editable path="patrons/flirt"]
+[editable path="patrons/rich"]

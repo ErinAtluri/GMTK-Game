@@ -17,6 +17,8 @@ var card_count : int = 0
 var state = State.Deal
 var selected_card : int = 0
 var turn : String = "gangster"
+var hit : bool = false
+var stand : int = 0
 
 var house_wallet : int = 200
 var personal_wallet : int = 0
@@ -26,6 +28,8 @@ func _ready():
 	
 	for patron in $patrons.get_children():
 		patron.connect("clicked", self, "patron_clicked")
+		patron.connect("hit", self, "patron_hit")
+		patron.connect("stand", self, "patron_stand")
 		
 	$dealer.connect("deal", self, "deal_self")
 		
@@ -36,23 +40,28 @@ func _ready():
 	$deal_ui/deck_h_box/first.modulate = WHITE
 	
 func _process(delta):
-	if state == State.Hit:
+	if state == State.Hit and !hit:
 		match turn:
 			"gangster":
 				$patrons/gangster.hit()
-				turn = "rich"
-			"rich":
-				$patrons/rich.hit()
-				turn = "flirt"
 			"flirt":
 				$patrons/flirt.hit()
+			"rich":
+				$patrons/rich.hit()
+			_:
+				pass
 	
 func set_deck() -> void:
 	for i in range(13):
 		for j in range(4):
 			var card = card_obj.instance()
 			card.suit = j
-			card.value = i
+			if i == 12:
+				card.value = 11
+			elif i >= 9 and i <= 11:
+				card.value = 10
+			else:
+				card.value = i + 2
 			card.get_node("sprite").texture = \
 				load("res://Assets/Cards/" + str(j) + "_" + \
 					str(i) + ".png")
@@ -70,12 +79,11 @@ func de_gayify_the_cards() -> void:
 	$deal_ui/deck_h_box/second.modulate = GRAY
 	$deal_ui/deck_h_box/third.modulate = GRAY
 	
-func deal_card(patron, position : Vector2) -> void:
+func deal_card(patron) -> void:
 	var card = deck[selected_card].duplicate()
-	if card_count <= 3:
-		card.position = patron.pos_1
-	else:
-		card.position = patron.pos_2
+	card.suit = deck[selected_card].suit
+	card.value = deck[selected_card].value
+	# card.position = pos
 	deck.remove(selected_card)
 	patron.get_node("cards").add_child(card)
 	card_count += 1
@@ -86,24 +94,61 @@ func patron_clicked(patron : Object) -> void:
 		match (patron.name):
 			"gangster":
 				if card_count == 0:
-					deal_card(patron, patron.pos_1)
+					deal_card(patron)
 				elif card_count == 4:
-					deal_card(patron, patron.pos_2)
-			"rich":
-				if card_count == 1:
-					deal_card(patron, patron.pos_1)
-				elif card_count == 5:
-					deal_card(patron, patron.pos_2)
+					deal_card(patron)
 			"flirt":
+				if card_count == 1:
+					deal_card(patron)
+				elif card_count == 5:
+					deal_card(patron)
+			"rich":
 				if card_count == 2:
-					deal_card(patron, patron.pos_1)
+					deal_card(patron)
 				elif card_count == 6:
-					deal_card(patron, patron.pos_2)
+					deal_card(patron)
 					state = State.Swap
 					$deal_ui.hide()
 					$swap_ui.show()
-	elif state == State.Hit:
-		pass # pls make gambler cards an hbox
+					
+	elif state == State.Hit and hit:
+		if patron.name == turn:
+			hit = false
+			
+			match turn:
+				"gangster":
+					deal_card($patrons/gangster)
+					turn = "flirt"
+				"flirt":
+					deal_card($patrons/flirt)
+					turn = "rich"
+				"rich":
+					deal_card($patrons/rich)
+					turn = "gangster"
+				_:
+					pass
+		
+func patron_hit(patron) -> void:
+	patron.get_node("dialog").text = "hit"
+	hit = true
+	
+func patron_stand(patron) -> void:
+	patron.get_node("dialog").text = "stand"
+	hit = false
+	stand += 1
+	
+	if stand >= 3:
+		pass
+	else:
+		match turn:
+			"gangster":
+				turn = "flirt"
+			"flirt":
+				turn = "rich"
+			"rich":
+				turn = "gangster"
+			_:
+				pass
 		
 func deal_self() -> void:
 	if state != State.Deal:
@@ -111,7 +156,7 @@ func deal_self() -> void:
 		
 	if card_count == 3:
 		var card = deck[selected_card].duplicate()
-		card.position = $dealer.pos_1
+		card.get_node("sprite").position = $dealer.pos_1
 		deck.remove(selected_card)
 		$dealer.get_node("cards").add_child(card)
 		set_top_three()
@@ -146,27 +191,26 @@ func _on_swap_button_pressed():
 		$patrons/gangster/cards.remove_child(child)
 		child.queue_free()
 		
-	$patrons/gangster/cards.add_child($patrons/flirt/cards.get_child(0).duplicate())
-	$patrons/gangster/cards.add_child($patrons/flirt/cards.get_child(1).duplicate())
-	
-	
-	for child in $patrons/flirt/cards.get_children():
-		$patrons/flirt/cards.remove_child(child)
-		child.queue_free()
-		
-	$patrons/flirt/cards.add_child($patrons/rich/cards.get_child(0).duplicate())
-	$patrons/flirt/cards.add_child($patrons/rich/cards.get_child(1).duplicate())
+	$patrons/gangster/cards.add_child($patrons/rich/cards.get_child(0).duplicate())
+	$patrons/gangster/cards.add_child($patrons/rich/cards.get_child(1).duplicate())
 	
 	for child in $patrons/rich/cards.get_children():
 		$patrons/rich/cards.remove_child(child)
 		child.queue_free()
 		
-	$patrons/rich/cards.add_child(temp_0)
-	$patrons/rich/cards.add_child(temp_1)
+	$patrons/rich/cards.add_child($patrons/flirt/cards.get_child(0).duplicate())
+	$patrons/rich/cards.add_child($patrons/flirt/cards.get_child(1).duplicate())
+	
+	for child in $patrons/flirt/cards.get_children():
+		$patrons/flirt/cards.remove_child(child)
+		child.queue_free()
+		
+	$patrons/flirt/cards.add_child(temp_0)
+	$patrons/flirt/cards.add_child(temp_1)
 	
 func _on_dont_swap_button_pressed():
 	var card = deck[selected_card].duplicate()
-	card.position = $dealer.pos_2
+	card.get_node("sprite").position = $dealer.pos_2
 	deck.remove(selected_card)
 	$dealer.get_node("cards").add_child(card)
 	$swap_ui.hide()
@@ -174,6 +218,10 @@ func _on_dont_swap_button_pressed():
 	
 	for child in $patrons.get_children():
 		child.place_bet()
+		child.calc_double_down()
 		
 	state = State.Hit
+	turn = "gangster"
+	hit = false
+	stand = 0
 	$deal_ui.show()
