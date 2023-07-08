@@ -15,4 +15,9 @@ public class Gangster : Gambler
     {
         
     }
+
+    public void YEEHAW()
+    {
+        Debug.Log("yee haw");
+    }
 }

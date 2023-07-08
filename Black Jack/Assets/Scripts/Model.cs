@@ -26,7 +26,7 @@ public class Model : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //gangster = ;
+        deck.SetDeck();
     }
 
     // Update is called once per frame
@@ -69,7 +69,7 @@ public class Model : MonoBehaviour
             case 0:
                 if (!gangster.HandFull())
                 {
-                    gangster.DealCard(deck.Pop());
+                    gangster.GetComponent<Gangster>().DealCard(deck.Pop());
                     Debug.Log("dealt to gangster");
                 }
 
