@@ -18,15 +18,15 @@ public class Model : MonoBehaviour
 
     private State state = State.Deal;
     private Deck deck = new Deck();
-    [SerializeField] private Flirt flirt;
     [SerializeField] private Gangster gangster;
     [SerializeField] private Rich rich;
+    [SerializeField] private Flirt flirt;
     [SerializeField] private InputHandler inputHandler;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //gangster = ;
     }
 
     // Update is called once per frame
@@ -88,7 +88,7 @@ public class Model : MonoBehaviour
                     flirt.DealCard(deck.Pop());
                     Debug.Log("dealt to flirt");
                 }
-                
+
                 break;
             }
             break;
