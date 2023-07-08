@@ -29,11 +29,38 @@ centered = false
 [node name="gangster" parent="patrons" instance=ExtResource( 2 )]
 position = Vector2( 452, 291 )
 
+[node name="sprite" parent="patrons/gangster/bets" index="0"]
+position = Vector2( 232, 379 )
+
+[node name="label" parent="patrons/gangster/bets" index="1"]
+margin_left = 170.0
+margin_top = 310.0
+margin_right = 311.0
+margin_bottom = 370.0
+
 [node name="rich" parent="patrons" instance=ExtResource( 4 )]
 position = Vector2( 885, 203 )
 
+[node name="sprite" parent="patrons/rich/bets" index="0"]
+position = Vector2( 61, 422 )
+
+[node name="label" parent="patrons/rich/bets" index="1"]
+margin_left = 39.0
+margin_top = 360.0
+margin_right = 180.0
+margin_bottom = 420.0
+
 [node name="flirt" parent="patrons" instance=ExtResource( 3 )]
 position = Vector2( 1338, 265 )
+
+[node name="sprite" parent="patrons/flirt/bets" index="0"]
+position = Vector2( -129, 382 )
+
+[node name="label" parent="patrons/flirt/bets" index="1"]
+margin_left = -131.0
+margin_top = 320.0
+margin_right = 10.0
+margin_bottom = 380.0
 
 [node name="dealer" parent="." instance=ExtResource( 6 )]
 
@@ -129,3 +156,7 @@ margin_bottom = 1008.0
 [connection signal="pressed" from="deal_ui/deck_h_box/third/third_button" to="." method="_on_third_button_pressed"]
 [connection signal="pressed" from="swap_ui/swap_button" to="." method="_on_swap_button_pressed"]
 [connection signal="pressed" from="swap_ui/dont_swap_button" to="." method="_on_dont_swap_button_pressed"]
+
+[editable path="patrons/gangster"]
+[editable path="patrons/rich"]
+[editable path="patrons/flirt"]

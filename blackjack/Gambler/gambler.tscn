@@ -36,6 +36,7 @@ centered = false
 [node name="cards" type="Node2D" parent="."]
 
 [node name="bets" type="Node2D" parent="."]
+visible = false
 
 [node name="sprite" type="Sprite" parent="bets"]
 position = Vector2( 138, 427 )
@@ -44,8 +45,10 @@ texture = ExtResource( 2 )
 centered = false
 
 [node name="label" type="Label" parent="bets"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 123.0
+margin_top = 358.0
+margin_right = 264.0
+margin_bottom = 418.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "$200"

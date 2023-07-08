@@ -14,6 +14,9 @@ func _ready():
 	
 func place_bet():
 	$bets.show()
-
+	
+func hit():
+	pass
+	
 func _on_button_pressed():
 	emit_signal("clicked", self)

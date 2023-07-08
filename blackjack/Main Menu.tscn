@@ -40,4 +40,3 @@ custom_fonts/font = SubResource( 1 )
 text = "TITLE"
 align = 1
 valign = 1
-percent_visible = -0.2

@@ -7,6 +7,7 @@ enum State {
 	Deal,
 	Swap,
 	Bet,
+	Hit,
 }
 
 var card_obj = preload("res://Card/card.tscn")
@@ -15,6 +16,7 @@ var deck : Array = []
 var card_count : int = 0
 var state = State.Deal
 var selected_card : int = 0
+var turn : String = "gangster"
 
 var house_wallet : int = 200
 var personal_wallet : int = 0
@@ -34,7 +36,16 @@ func _ready():
 	$deal_ui/deck_h_box/first.modulate = WHITE
 	
 func _process(delta):
-	pass
+	if state == State.Hit:
+		match turn:
+			"gangster":
+				$patrons/gangster.hit()
+				turn = "rich"
+			"rich":
+				$patrons/rich.hit()
+				turn = "flirt"
+			"flirt":
+				$patrons/flirt.hit()
 	
 func set_deck() -> void:
 	for i in range(13):
@@ -69,30 +80,30 @@ func deal_card(patron, position : Vector2) -> void:
 	patron.get_node("cards").add_child(card)
 	card_count += 1
 	set_top_three()
-			
+	
 func patron_clicked(patron : Object) -> void:
-	if state != State.Deal:
-		return
-		
-	match (patron.name):
-		"gangster":
-			if card_count == 0:
-				deal_card(patron, patron.pos_1)
-			elif card_count == 4:
-				deal_card(patron, patron.pos_2)
-		"rich":
-			if card_count == 1:
-				deal_card(patron, patron.pos_1)
-			elif card_count == 5:
-				deal_card(patron, patron.pos_2)
-		"flirt":
-			if card_count == 2:
-				deal_card(patron, patron.pos_1)
-			elif card_count == 6:
-				deal_card(patron, patron.pos_2)
-				state = State.Swap
-				$deal_ui.hide()
-				$swap_ui.show()
+	if state == State.Deal:
+		match (patron.name):
+			"gangster":
+				if card_count == 0:
+					deal_card(patron, patron.pos_1)
+				elif card_count == 4:
+					deal_card(patron, patron.pos_2)
+			"rich":
+				if card_count == 1:
+					deal_card(patron, patron.pos_1)
+				elif card_count == 5:
+					deal_card(patron, patron.pos_2)
+			"flirt":
+				if card_count == 2:
+					deal_card(patron, patron.pos_1)
+				elif card_count == 6:
+					deal_card(patron, patron.pos_2)
+					state = State.Swap
+					$deal_ui.hide()
+					$swap_ui.show()
+	elif state == State.Hit:
+		pass # pls make gambler cards an hbox
 		
 func deal_self() -> void:
 	if state != State.Deal:
@@ -163,3 +174,6 @@ func _on_dont_swap_button_pressed():
 	
 	for child in $patrons.get_children():
 		child.place_bet()
+		
+	state = State.Hit
+	$deal_ui.show()
