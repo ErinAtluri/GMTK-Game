@@ -1,0 +1,131 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/mock.png" type="Texture" id=1]
+[ext_resource path="res://Gambler/gangster.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Gambler/flirt.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Gambler/rich.tscn" type="PackedScene" id=4]
+[ext_resource path="res://root.gd" type="Script" id=5]
+[ext_resource path="res://dealer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Fonts/Roboto-Black.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=2]
+size = 60
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 7 )
+
+[node name="root" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="bg" type="Sprite" parent="."]
+scale = Vector2( 1.31978, 1.32069 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="patrons" type="Node2D" parent="."]
+
+[node name="gangster" parent="patrons" instance=ExtResource( 2 )]
+position = Vector2( 452, 291 )
+
+[node name="rich" parent="patrons" instance=ExtResource( 4 )]
+position = Vector2( 885, 203 )
+
+[node name="flirt" parent="patrons" instance=ExtResource( 3 )]
+position = Vector2( 1338, 265 )
+
+[node name="dealer" parent="." instance=ExtResource( 6 )]
+
+[node name="base_ui" type="Node2D" parent="."]
+
+[node name="house_wallet" type="Label" parent="base_ui"]
+margin_left = 41.0
+margin_top = 27.0
+margin_right = 200.0
+margin_bottom = 98.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "$200"
+
+[node name="personal_wallet" type="Label" parent="base_ui"]
+margin_left = 40.0
+margin_top = 92.0
+margin_right = 188.0
+margin_bottom = 163.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "$0"
+
+[node name="deal_ui" type="Node2D" parent="."]
+scale = Vector2( 0.05, 0.05 )
+
+[node name="deck_h_box" type="HBoxContainer" parent="deal_ui"]
+margin_left = 27420.0
+margin_top = 16500.0
+margin_right = 37500.0
+margin_bottom = 20960.0
+size_flags_horizontal = 3
+
+[node name="first" type="TextureRect" parent="deal_ui/deck_h_box"]
+margin_right = 3357.0
+margin_bottom = 4460.0
+size_flags_horizontal = 3
+
+[node name="first_button" type="Button" parent="deal_ui/deck_h_box/first"]
+anchor_right = 0.166
+anchor_bottom = 0.17
+margin_right = 1571.38
+margin_bottom = 2679.4
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="second" type="TextureRect" parent="deal_ui/deck_h_box"]
+margin_left = 3361.0
+margin_right = 6718.0
+margin_bottom = 4460.0
+size_flags_horizontal = 3
+
+[node name="second_button" type="Button" parent="deal_ui/deck_h_box/second"]
+margin_right = 2312.0
+margin_bottom = 3100.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="third" type="TextureRect" parent="deal_ui/deck_h_box"]
+margin_left = 6722.0
+margin_right = 10080.0
+margin_bottom = 4460.0
+size_flags_horizontal = 3
+
+[node name="third_button" type="Button" parent="deal_ui/deck_h_box/third"]
+margin_right = 2024.0
+margin_bottom = 3180.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="swap_ui" type="Node2D" parent="."]
+visible = false
+
+[node name="swap_button" type="Button" parent="swap_ui"]
+margin_left = 1390.0
+margin_top = 842.0
+margin_right = 1621.0
+margin_bottom = 1008.0
+custom_fonts/font = SubResource( 1 )
+text = "SWAP"
+
+[node name="dont_swap_button" type="Button" parent="swap_ui"]
+margin_left = 1644.0
+margin_top = 846.0
+margin_right = 1864.0
+margin_bottom = 1008.0
+
+[connection signal="pressed" from="deal_ui/deck_h_box/first/first_button" to="." method="_on_first_button_pressed"]
+[connection signal="pressed" from="deal_ui/deck_h_box/second/second_button" to="." method="_on_second_button_pressed"]
+[connection signal="pressed" from="deal_ui/deck_h_box/third/third_button" to="." method="_on_third_button_pressed"]
+[connection signal="pressed" from="swap_ui/swap_button" to="." method="_on_swap_button_pressed"]
+[connection signal="pressed" from="swap_ui/dont_swap_button" to="." method="_on_dont_swap_button_pressed"]
