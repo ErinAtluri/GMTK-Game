@@ -52,7 +52,7 @@ public class Deck : MonoBehaviour
 
     public Card Pop()
     {
-        Card topCard = deck[0]; // might pass by reference idk
+        Card topCard = new Card(deck[0].suit, deck[0].value);
         deck.RemoveAt(0);
         return topCard;
     }

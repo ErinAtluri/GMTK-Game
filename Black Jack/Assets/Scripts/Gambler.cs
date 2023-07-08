@@ -39,6 +39,11 @@ public class Gambler : MonoBehaviour
         return false;
     }
 
+    public List<Card> GetHand()
+    {
+        return hand;
+    }
+
     public int GetScore()
     {
         return 0;

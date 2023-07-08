@@ -23,6 +23,8 @@ public class Model : MonoBehaviour
     [SerializeField] private Flirt flirt;
     [SerializeField] private InputHandler inputHandler;
 
+    [SerializeField] private GameObject cardPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +59,11 @@ public class Model : MonoBehaviour
         }
     }
 
+    private void CreateCard(Card card)
+    {
+        Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+    }
+
     private void Clicked()
     {
         switch (state)
@@ -69,7 +76,9 @@ public class Model : MonoBehaviour
             case 0:
                 if (!gangster.HandFull())
                 {
-                    gangster.GetComponent<Gangster>().DealCard(deck.Pop());
+                    Card card = deck.Pop();
+                    gangster.DealCard(card);
+                    CreateCard(card);
                     Debug.Log("dealt to gangster");
                 }
 
@@ -91,6 +100,12 @@ public class Model : MonoBehaviour
 
                 break;
             }
+
+            foreach (Card card in gangster.GetHand())
+            {
+                // pass
+            }
+
             break;
         case State.Swap:
             break;
