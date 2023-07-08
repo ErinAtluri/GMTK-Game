@@ -192,10 +192,9 @@ func payout() -> void:
 	for child in $dealer.get_node("cards").get_children():
 		dealer_score += child.value
 		
-	while dealer_score > 21:
-		for child in $dealer.get_node("cards").get_children():
-			if child.value == 11:
-				dealer_score -= 10
+	for child in $dealer.get_node("cards").get_children():
+		if child.value == 11 and dealer_score > 21:
+			dealer_score -= 10
 				
 	for i in range(3):
 		if dealer_score > 21:

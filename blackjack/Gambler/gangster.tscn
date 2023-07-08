@@ -9,7 +9,6 @@
 [ext_resource path="res://Assets/Art/Ozo/ozo_lackeyBase.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Art/Ozo/ozo_lackey_gun.png" type="Texture" id=8]
 
-
 [node name="gangster" instance=ExtResource( 1 )]
 
 [node name="mafia" type="Sprite" parent="." index="0"]

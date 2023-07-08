@@ -22,10 +22,9 @@ func get_score() -> int:
 	for child in $cards.get_children():
 		score += child.value
 		
-	while score > 21:
-		for child in $cards.get_children():
-			if child.value == 11:
-				score -= 10
+	for child in $cards.get_children():
+		if child.value == 11 and score > 21:
+			score -= 10
 		
 	return score
 	
