@@ -24,4 +24,15 @@ public class Card : MonoBehaviour
     {
         
     }
+
+    public GameObject CreateObject()
+    {
+        GameObject obj = new GameObject(this.suit.ToString() + "_" + this.value.ToString());
+        
+        SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer> ();
+        Sprite sprite = Resources.Load<Sprite> ("Sprites/Cards" + obj.name + ".png");
+        spriteRenderer.sprite = sprite;
+
+        return obj;
+    }
 }
