@@ -68,13 +68,11 @@ font_data = ExtResource( 10 )
 script = ExtResource( 5 )
 
 [node name="sfx" type="AudioStreamPlayer" parent="."]
-bus = "sfx"
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
 volume_db = -5.368
 autoplay = true
-bus = "music"
 
 [node name="timer" type="Timer" parent="."]
 
@@ -453,7 +451,6 @@ text = "Continue"
 flat = true
 
 [node name="day_popup" type="Node2D" parent="."]
-visible = false
 z_index = 2
 
 [node name="end_of_day_bg" type="Sprite" parent="day_popup"]
@@ -477,7 +474,7 @@ custom_fonts/font = SubResource( 11 )
 text = "Savings:
 House Earning:
 Tips:
-Money Needed:                 $8000"
+"
 
 [node name="savings" type="Label" parent="day_popup"]
 margin_left = 1189.0
@@ -527,6 +524,19 @@ custom_fonts/font = SubResource( 8 )
 enabled_focus_mode = 0
 text = "Continue"
 flat = true
+
+[node name="money_needed_text" type="Label" parent="day_popup"]
+margin_left = 438.0
+margin_top = 336.0
+margin_right = 866.0
+margin_bottom = 585.0
+custom_colors/font_color = Color( 0.886275, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0.682353, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.47451, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "
+Money Needed:                 -$8000"
+valign = 2
 
 [node name="pause_popup" type="Node2D" parent="."]
 visible = false
