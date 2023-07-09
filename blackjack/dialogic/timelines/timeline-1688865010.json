@@ -1,0 +1,67 @@
+{
+	"events": [
+		{
+			"character": "character-1688865130.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Hello one and all to my table. My name is 4, and I have the great honor of being your Dealer for the night, and perhaps for the next week or so.\n…\nI see this table is full of some serious faces, some even familiar. Perhaps I can make a bit of fun for y’all.\nNow, since you’ve been seated at the Blackjack table, let’s run through the rules, shall we? "
+		},
+		{
+			"event_id": "dialogic_015",
+			"id": "anchor-1634488067",
+			"index": 0,
+			"name": "Rules"
+		},
+		{
+			"character": "character-1688865130.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "We’ll all bet the same amount at the start of every round, and I’ll pass around 2 cards to each of you as well as myself. \nThe goal of the game is to make a hand close to but under 21, with face cards being worth 10 and ace being 1 or 11. \nAfter dealing cards, you can look at them and choose to stand, meaning you take no more cards, hit, meaning I deal you another card with the option for more, or double down, meaning you double your wager and I deal you your final card. \nYou can continue to hit until you reach or go over 21, at which point everyone reveals their cards. \nIf a player goes over 21, they’re out automatically. A player with a hand of 21 wins, or if there are none, the player with the hand closest to it does. "
+		},
+		{
+			"character": "character-1688865130.json",
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"portrait": "",
+			"question": "Y'all get all that?"
+		},
+		{
+			"choice": "Yes",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"change_timeline": "timeline-1688866005.json",
+			"event_id": "dialogic_020"
+		},
+		{
+			"choice": "No",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1688865130.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Alright lemme repeat it all then."
+		},
+		{
+			"anchor_id": "anchor-1634488067",
+			"event_id": "dialogic_016"
+		},
+		{
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1688865010.json",
+		"name": "Beginning"
+	}
+}

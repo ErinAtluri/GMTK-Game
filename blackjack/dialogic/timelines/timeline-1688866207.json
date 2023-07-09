@@ -1,0 +1,19 @@
+{
+	"events": [
+		{
+			"character": "character-1688865130.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "[i] Alright, let’s see how best to do this.\n[i] I was brought on for my card skills, so I have to make sure I can pay back The House but still make enough for my family.\n[i] Ozo is the grumpiest, and that guy in the back looks like he works for him. Definitely don’t want to be on their bad side.\n[i] Finnigan seemed to be a bit overconfident, I think remember seeing him on the news as some CEO so he definitely has a lot of money.\n[i] And Tippy, she’s very forward and flirty like she wants to get her way, but I heard another Dealer mention that she’s given bribes before. \n[i] With my skills right now, I can swap out cards from the top of the deck pretty easily while dealing, and this table should be able to quickly rotate a bit if I need to swap people’s hands.\n[i] As long as I balance out who wins, I should be able to make enough but still seem fair and make my money. [/i]"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 1
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1688866207.json",
+		"name": "Inner Thoughts"
+	}
+}

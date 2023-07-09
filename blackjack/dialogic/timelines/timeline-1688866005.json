@@ -1,0 +1,48 @@
+{
+	"events": [
+		{
+			"character": "character-1688865116.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Can we just get on with it already?"
+		},
+		{
+			"character": "character-1688865130.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Yes we can, Mister Ozo. Give me a moment to prepare the deck."
+		},
+		{
+			"character": "character-1688865123.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "How do we know you’re not cheating."
+		},
+		{
+			"character": "character-1688863457.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Oh I’m sure we don’t need to worry about that. Right, sugar?"
+		},
+		{
+			"character": "character-1688865130.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Yes, thank you Miss Tippy you are correct. Mister Finnigan, you don’t need to worry about a thing, we’re in The House after all.\nNow then, let’s begin the game! "
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"change_timeline": "timeline-1688866207.json",
+			"event_id": "dialogic_020"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1688866005.json",
+		"name": "Intro"
+	}
+}
