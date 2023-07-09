@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Fonts/josefin-sans/JosefinSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Ui/Quit Button.png" type="Texture" id=2]
@@ -8,13 +8,24 @@
 [ext_resource path="res://Assets/Ui/Back Arrow.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Ui/Intel Button.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Art/mainMenu.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Art/Profiles/flirtProfile.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Art/Profiles/fishProfile.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Art/Profiles/ozoProfile.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 198
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 118
+size = 119
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 60
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 30
 font_data = ExtResource( 1 )
 
 [node name="Main Menu" type="Control"]
@@ -122,11 +133,132 @@ margin_bottom = 306.0
 icon = ExtResource( 6 )
 flat = true
 
+[node name="Intel Menu" type="CanvasLayer" parent="."]
+
+[node name="BG" type="ColorRect" parent="Intel Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.215686, 0.231373, 0.254902, 0.956863 )
+
+[node name="Bios" type="Label" parent="Intel Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1549.0
+margin_bottom = -883.0
+rect_pivot_offset = Vector2( -602, 0 )
+custom_fonts/font = SubResource( 2 )
+text = "Bios"
+align = 1
+valign = 1
+
+[node name="Mr Finnigan" type="Label" parent="Intel Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1354.0
+margin_top = 135.0
+margin_right = -195.0
+margin_bottom = -748.0
+rect_pivot_offset = Vector2( -602, 0 )
+custom_fonts/font = SubResource( 3 )
+text = "Mr. Finnigan"
+align = 1
+valign = 1
+
+[node name="Ozo" type="Label" parent="Intel Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 296.0
+margin_top = 164.0
+margin_right = -1253.0
+margin_bottom = -722.0
+rect_pivot_offset = Vector2( 419, 143 )
+custom_fonts/font = SubResource( 3 )
+text = "Ozo
+"
+align = 1
+valign = 1
+
+[node name="Tippy" type="Label" parent="Intel Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 830.0
+margin_top = 133.0
+margin_right = -719.0
+margin_bottom = -750.0
+rect_pivot_offset = Vector2( -602, 0 )
+custom_fonts/font = SubResource( 3 )
+text = "Tippy"
+align = 1
+valign = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Intel Menu"]
+anchor_bottom = 1.0
+margin_left = 44.0
+margin_top = 773.0
+margin_right = 356.0
+margin_bottom = -1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Intel Menu/CenterContainer"]
+margin_right = 312.0
+margin_bottom = 306.0
+
+[node name="Back" type="Button" parent="Intel Menu/CenterContainer/VBoxContainer"]
+margin_right = 312.0
+margin_bottom = 306.0
+icon = ExtResource( 6 )
+flat = true
+
+[node name="OzoImage4" type="Sprite" parent="Intel Menu"]
+position = Vector2( -974, 657 )
+scale = Vector2( 0.369254, 0.380089 )
+texture = ExtResource( 10 )
+offset = Vector2( 6776.18, -730.623 )
+
+[node name="OzoImage3" type="Sprite" parent="Intel Menu"]
+position = Vector2( -1572, 661 )
+scale = Vector2( 0.382369, 0.370917 )
+texture = ExtResource( 9 )
+offset = Vector2( 6776.18, -730.623 )
+
+[node name="OzoImage2" type="Sprite" parent="Intel Menu"]
+position = Vector2( 481, 384 )
+scale = Vector2( 0.397269, 0.397269 )
+texture = ExtResource( 11 )
+
+[node name="TippyLabel" type="RichTextLabel" parent="Intel Menu"]
+margin_left = 797.0
+margin_top = 524.0
+margin_right = 1239.0
+margin_bottom = 828.0
+rect_pivot_offset = Vector2( 524, 293 )
+custom_fonts/normal_font = SubResource( 4 )
+text = "Tippy is known around town for her happy go lucky attitude and her charming personality. What most don’t know is that she actively uses it to manipulate the people around her, having used it to gain math wealths of money. To her, money is no object, merely a means to an end, and she will use it to do whatever she wants. No one knows what her plans are, but she knows she wants a card from everyone in her hand."
+
+[node name="FinLabel" type="RichTextLabel" parent="Intel Menu"]
+margin_left = 1329.0
+margin_top = 511.0
+margin_right = 1773.0
+margin_bottom = 817.0
+rect_pivot_offset = Vector2( 524, 293 )
+custom_fonts/normal_font = SubResource( 4 )
+text = "Finnigan is the rich CEO of the city’s major tech company. Not afraid to throw around his name or money to get what he wants, Finnigan is known for being arrogant yet can back it up with his quick thinking and decision making abilities. Having achieved everything he’s ever wanted, he has gained a gambling addiction, enjoying the feeling of excitement that comes with the chance of losing everything, though his ability to quickly calculate risks prevents him from losing too much. "
+
+[node name="OzoLabel" type="RichTextLabel" parent="Intel Menu"]
+margin_left = 263.0
+margin_top = 514.0
+margin_right = 707.0
+margin_bottom = 831.0
+rect_pivot_offset = Vector2( 524, 293 )
+custom_fonts/normal_font = SubResource( 4 )
+text = "Ozo is a completely normal civilian. On the surface, he was a nepo baby born into mass amounts of wealth, which he uses to run the city’s successful laundry franchise. What most don’t know, however, is that he is also the leader of the criminal underbelly of the city, lead by him completely anonymously. Simply known to his mafia crew as The Mafioso, he has tactically taken down opposing crews and gathered money throughout the city. Driven by success, and with a bit of a fear of failure, he can’t stand to lose for too long.
+"
+
 [connection signal="pressed" from="Play Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Play Button" to="." method="_on_Play_Button_pressed"]
-[connection signal="pressed" from="Credits Button" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="Credits Button" to="." method="_on_Credits_Button_pressed"]
-[connection signal="pressed" from="Quit Button" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="Credits Button" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="Quit Button" to="." method="_on_Quit_Button_pressed"]
+[connection signal="pressed" from="Quit Button" to="." method="_on_Button3_pressed"]
 [connection signal="pressed" from="Intel Button" to="." method="_on_Intel_Button_pressed"]
 [connection signal="pressed" from="Credit Menu/CenterContainer/VBoxContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="Intel Menu/CenterContainer/VBoxContainer/Back" to="." method="_on_Back_pressed"]

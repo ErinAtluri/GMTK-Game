@@ -1,0 +1,15 @@
+{
+	"events": [
+		{
+			"character": "character-1688865123.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Hold the tap!"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1688884242.json",
+		"name": "FinniganStand"
+	}
+}
