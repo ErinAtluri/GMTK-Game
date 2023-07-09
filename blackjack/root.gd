@@ -476,3 +476,23 @@ func _on_continue_button_pressed():
 func _on_day_cont_button_pressed():
 	state = State.Deal
 	$day_popup.hide()
+	
+func _on_pause_button_pressed():
+	$pause_popup.show()
+	
+func _on_menu_button_pressed():
+	get_tree().change_scene("res://Main Menu.tscn")
+	
+func _on_resume_button_pressed():
+	$pause_popup.hide()
+	
+func _on_quit_button_pressed():
+	get_tree().quit()
+	
+func _on_sfx_volume_slider_value_changed(value):
+	AudioServer.set_bus_volume_db( \
+		AudioServer.get_bus_index("sfx"), linear2db(value / 100))
+	
+func _on_music_volume_slider_value_changed(value):
+	AudioServer.set_bus_volume_db( \
+		AudioServer.get_bus_index("music"), linear2db(value / 100))

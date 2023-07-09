@@ -126,7 +126,7 @@ flat = true
 [connection signal="pressed" from="Play Button" to="." method="_on_Play_Button_pressed"]
 [connection signal="pressed" from="Credits Button" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="Credits Button" to="." method="_on_Credits_Button_pressed"]
-[connection signal="pressed" from="Quit Button" to="." method="_on_Quit_Button_pressed"]
 [connection signal="pressed" from="Quit Button" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="Quit Button" to="." method="_on_Quit_Button_pressed"]
 [connection signal="pressed" from="Intel Button" to="." method="_on_Intel_Button_pressed"]
 [connection signal="pressed" from="Credit Menu/CenterContainer/VBoxContainer/Back" to="." method="_on_Back_pressed"]
