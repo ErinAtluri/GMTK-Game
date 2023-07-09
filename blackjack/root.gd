@@ -74,14 +74,8 @@ func _ready():
 		$sfx.play()
 	else:
 		if get_node("/root/Globals").ozo_anger == 2:
-			match randi() % 2:
-				0:
-					var new_dialog = Dialogic.start("OzoAnger2.1")
-					add_child(new_dialog)
-				1:
-					var new_dialog = Dialogic.start("OzoAnger2.2")
-					add_child(new_dialog)
-			# istg if i lose one more time
+			var new_dialog = Dialogic.start("OzoAnger2.1")
+			add_child(new_dialog)
 		
 	get_node("/root/Globals").tips = 0
 	

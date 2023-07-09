@@ -6,7 +6,7 @@ var tips : int = 0
 
 var roun_d : int = 0
 var letter_shown : bool = false
-var day_start : bool
+var day_start : bool = false
 
 var ozo_anger : int = 0
 var tippy_happy : int = 0

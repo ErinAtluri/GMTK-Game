@@ -451,6 +451,7 @@ text = "Continue"
 flat = true
 
 [node name="day_popup" type="Node2D" parent="."]
+visible = false
 z_index = 2
 
 [node name="end_of_day_bg" type="Sprite" parent="day_popup"]
