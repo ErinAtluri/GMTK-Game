@@ -18,6 +18,12 @@ var ozo_win_sounds : Array = []
 var tippy_talk_sounds : Array = []
 var tippy_win_sounds : Array = []
 
+var deal
+var kaching
+var growl
+var swap
+var win
+
 func _ready():
 	ceo_talk_sounds.append(load("res://Assets/Audio/CEO Talk Sounds/CEOtalk1final.wav"))
 	ceo_talk_sounds.append(load("res://Assets/Audio/CEO Talk Sounds/CEOtalk2final.wav"))
@@ -47,3 +53,9 @@ func _ready():
 	
 	tippy_win_sounds.append(load("res://Assets/Audio/Tippy Win Sounds/TippyWinFinal1.wav"))
 	tippy_win_sounds.append(load("res://Assets/Audio/Tippy Win Sounds/TippyWinFinal2.wav"))
+
+	deal = load("res://Assets/Audio/deal.wav")
+	kaching = load("res://Assets/Audio/kaching.wav")
+	growl = load("res://Assets/Audio/Ozo_11Growl.wav")
+	swap = load("res://Assets/Audio/swap.wav")
+	win = load("res://Assets/Audio/win.wav")

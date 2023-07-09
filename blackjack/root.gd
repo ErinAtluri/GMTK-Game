@@ -70,6 +70,9 @@ func _ready():
 			str(get_node("/root/Globals").tips)
 		$day_popup.show()
 		
+		$sfx.set_stream(get_node("/root/Globals").kaching)
+		$sfx.play()
+		
 	get_node("/root/Globals").tips = 0
 	
 func _process(delta):
@@ -136,6 +139,9 @@ func deal_card(patron) -> void:
 	patron.get_node("cards").add_child(card)
 	card_count += 1
 	set_top_three()
+	
+	$sfx.set_stream(get_node("/root/Globals").deal)
+	$sfx.play()
 	
 	update_scores()
 	
@@ -257,6 +263,9 @@ func payout() -> void:
 	patron_doubled.append($patrons/flirt.bet)
 	patron_doubled.append($patrons/rich.bet)
 	var dealer_score : int = get_dealer_score()
+	
+	$sfx.set_stream(get_node("/root/Globals").kaching)
+	$sfx.play()
 	
 	for i in range(3):
 		if dealer_score > 21:
@@ -415,6 +424,9 @@ func _on_swap_button_pressed():
 	var temp_card = null
 	var temp_0 = null
 	var temp_1 = null
+	
+	$sfx.set_stream(get_node("/root/Globals").swap)
+	$sfx.play()
 	
 	temp_0 = $patrons/gangster/cards.get_child(0).duplicate()
 	temp_0.suit = $patrons/gangster/cards.get_child(0).suit
