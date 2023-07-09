@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Ozo_3-.wav-9b141d840cedb395cf61c3d781beaa63.sample"
+path="res://.import/Ozo_3.wav-07582a92f3088ec9a1244824ca294e0e.sample"
 
 [deps]
 
-source_file="res://Assets/Audio/Ozo Talk Sounds/Ozo_3-.wav"
-dest_files=[ "res://.import/Ozo_3-.wav-9b141d840cedb395cf61c3d781beaa63.sample" ]
+source_file="res://Assets/Audio/Ozo Talk Sounds/Ozo_3.wav"
+dest_files=[ "res://.import/Ozo_3.wav-07582a92f3088ec9a1244824ca294e0e.sample" ]
 
 [params]
 
