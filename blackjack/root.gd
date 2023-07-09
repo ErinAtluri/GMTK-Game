@@ -39,7 +39,8 @@ func _ready():
 	$dealer.connect("deal", self, "deal_self")
 	
 	house_wallet = get_node("/root/Globals").house
-	personal_wallet = get_node("/root/Globals").personal
+	personal_wallet = get_node("/root/Globals").personal + \
+		get_node("/root/Globals").tips
 		
 	set_deck()
 	
@@ -420,8 +421,6 @@ func payout() -> void:
 		$patrons/gangster/gun.hide()
 	
 	$payout_ui.show()
-	
-	get_node("/root/Globals").personal += get_node("/root/Globals").tips
 	
 	timer_on = true
 	$timer.start(2.0)
