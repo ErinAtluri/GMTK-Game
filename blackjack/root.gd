@@ -401,7 +401,7 @@ func payout() -> void:
 				$dialog.add_child(new_dialog)
 			"flirt":
 				play_audio(get_node("/root/Globals").tippy_win_sounds)
-				var new_dialog = Dialogic.start("TippyWin" + str((randi() % 3) + 1))
+				var new_dialog = Dialogic.start("TippyTip" + str((randi() % 2) + 1))
 				$dialog.add_child(new_dialog)
 			"rich":
 				play_audio(get_node("/root/Globals").ceo_win_sounds)
@@ -467,9 +467,6 @@ func hide_cards_after_timeout() -> void:
 		patron.get_node("cards").hide()
 		
 	$dealer/cards.hide()
-	
-	var new_dialog = Dialogic.start("TippyTip" + str((randi() % 2) + 1))
-	$dialog.add_child(new_dialog)
 	
 func _on_first_button_pressed():
 	if state == State.Deal or state == State.Hit:
