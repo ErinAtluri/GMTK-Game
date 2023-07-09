@@ -58,11 +58,19 @@ func _ready():
 	if get_node("/root/Globals").day_start:
 		state = State.Letter
 		get_node("/root/Globals").day_start = false
+		get_node("/root/Globals").personal += \
+			get_node("/root/Globals").house * 0.25
 		$day_popup/day_label.text = "Day " + \
-			str(get_node("/root/Globals").roun_d / 5)
-		$day_popup/personal_money.text = "Money: $" + \
+			str(get_node("/root/Globals").roun_d / 3)
+		$day_popup/savings.text = "$" + \
 			str(get_node("/root/Globals").personal)
+		$day_popup/house.text = "$" + \
+			str(get_node("/root/Globals").house * 0.25)
+		$day_popup/tips.text = "$" + \
+			str(get_node("/root/Globals").tips)
 		$day_popup.show()
+		
+	get_node("/root/Globals").tips = 0
 	
 func _process(delta):
 	if state == State.Hit and !hit:
@@ -291,6 +299,10 @@ func payout() -> void:
 			"flirt":
 				winner_name = "Tippy"
 				get_node("/root/Globals").tippy_happy += 1
+				get_node("/root/Globals").tips += 50 * \
+					get_node("/root/Globals").tippy_happy
+				get_node("/root/Globals").personal += get_node("/root/Globals").tips
+				$base_ui/personal_wallet.text = str(get_node("/root/Globals").personal)
 			"rich":
 				winner_name = "Fin"
 				
@@ -464,7 +476,7 @@ func _on_next_round_button_pressed():
 	get_node("/root/Globals").house = house_wallet
 	get_node("/root/Globals").personal = personal_wallet
 	get_node("/root/Globals").roun_d += 1
-	if get_node("/root/Globals").roun_d % 5 == 0:
+	if get_node("/root/Globals").roun_d % 3 == 0:
 		get_node("/root/Globals").day_start = true
 	get_tree().reload_current_scene()
 	

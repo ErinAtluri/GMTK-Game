@@ -1,0 +1,15 @@
+{
+	"events": [
+		{
+			"character": "character-1688863457.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Perhaps someone can turn my luck around..."
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1688882930.json",
+		"name": "TippyLose3"
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"events": [
+		{
+			"character": "character-1688863457.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Thanks for the good cards, sugar!"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1688883034.json",
+		"name": "TippyWin2"
+	}
+}
