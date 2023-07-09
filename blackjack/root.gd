@@ -264,9 +264,6 @@ func payout() -> void:
 	patron_doubled.append($patrons/rich.bet)
 	var dealer_score : int = get_dealer_score()
 	
-	$sfx.set_stream(get_node("/root/Globals").kaching)
-	$sfx.play()
-	
 	for i in range(3):
 		if dealer_score > 21:
 			if patron_scores[i] > 21:
@@ -342,6 +339,20 @@ func payout() -> void:
 				winner_name = "Fin"
 				
 		$base_ui/scoreboard_label.text += winner_name + "\n"
+		
+	if winners.size() == 0:
+		$base_ui/scoreboard_label.text = "Winner:\nHouse"
+		
+		$sfx.set_stream(get_node("/root/Globals").kaching)
+		$sfx.play()
+	else:
+		match winners[randi() % winners.size()]:
+			"gangster":
+				play_audio(get_node("/root/Globals").ozo_win_sounds)
+			"flirt":
+				play_audio(get_node("/root/Globals").tippy_win_sounds)
+			"rich":
+				play_audio(get_node("/root/Globals").ceo_win_sounds)
 		
 	if not "gangster" in winners:
 		get_node("/root/Globals").ozo_anger += 1
