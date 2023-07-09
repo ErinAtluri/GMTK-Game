@@ -538,7 +538,7 @@ custom_colors/font_outline_modulate = Color( 0.682353, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0.47451, 0, 0, 1 )
 custom_fonts/font = SubResource( 11 )
 text = "
-Money Needed:                 -$8000"
+Money Needed:                 -$1800"
 valign = 2
 
 [node name="pause_popup" type="Node2D" parent="."]

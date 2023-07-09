@@ -613,7 +613,7 @@ func _on_day_cont_button_pressed():
 	state = State.Deal
 	$day_popup.hide()
 	
-	if get_node("/root/Globals").personal >= 8000:
+	if get_node("/root/Globals").personal >= 1800:
 		get_tree().change_scene("res://win.tscn")
 	if get_node("/root/Globals").ozo_anger == 2:
 		$patrons/gangster/gun.show()
