@@ -96,6 +96,8 @@ func deal_card(patron) -> void:
 	card_count += 1
 	set_top_three()
 	
+	update_scores()
+	
 func patron_clicked(patron : Object) -> void:
 	if state == State.Deal:
 		match (patron.name):
@@ -136,11 +138,11 @@ func patron_clicked(patron : Object) -> void:
 					pass
 		
 func patron_hit(patron) -> void:
-	patron.bark("hit")
+	# patron.bark("hit")
 	hit = true
 	
 func patron_stand(patron) -> void:
-	patron.bark("stand")
+	# patron.bark("stand")
 	hit = false
 	stand += 1
 	
@@ -184,6 +186,8 @@ func deal_self() -> void:
 		set_top_three()
 		turn = "gangster"
 		
+	update_scores()
+		
 func payout() -> void:
 	var patron_doubled : PoolIntArray = PoolIntArray([])
 	var patron_scores : PoolIntArray = PoolIntArray([])
@@ -194,16 +198,8 @@ func payout() -> void:
 	patron_doubled.append($patrons/gangster.bet)
 	patron_doubled.append($patrons/flirt.bet)
 	patron_doubled.append($patrons/rich.bet)
-	var dealer_score : int = 0
+	var dealer_score : int = get_dealer_score()
 	
-	for child in $dealer.get_node("cards").get_children():
-		dealer_score += child.value
-		
-	for child in $dealer.get_node("cards").get_children():
-		for grandchild in $dealer.get_node("cards").get_children():
-			if child.value == 11 and dealer_score > 21:
-				dealer_score -= 10
-				
 	for i in range(3):
 		if dealer_score > 21:
 			if patron_scores[i] > 21:
@@ -259,10 +255,34 @@ func payout() -> void:
 	$base_ui/house_wallet.text = "$" + str(house_wallet)
 	$base_ui/personal_wallet.text = "$" + str(personal_wallet)
 	
-	$payout_ui/winners_label.text = "Winners:\n"
+	$base_ui/scoreboard_label.text = "Winners:\n"
 	for winner in winners:
-		$payout_ui/winners_label.text += winner + "\n"
+		$base_ui/scoreboard_label.text += winner + "\n"
 	$payout_ui.show()
+	
+func update_scores() -> void:
+	var ozo_score : int = $patrons/gangster.get_score()
+	var tippy_score : int = $patrons/flirt.get_score()
+	var fin_score : int = $patrons/rich.get_score()
+	var dealer_score : int = get_dealer_score()
+	
+	$base_ui/scoreboard_label.text = "Score:\n4: " + \
+		str(dealer_score) + "\nOzo: " + str(ozo_score) + \
+			"\nTippy: " + str(tippy_score) + "\nFin: " + \
+				str(fin_score)
+	
+func get_dealer_score() -> int:
+	var dealer_score : int = 0
+	
+	for child in $dealer.get_node("cards").get_children():
+		dealer_score += child.value
+		
+	for child in $dealer.get_node("cards").get_children():
+		for grandchild in $dealer.get_node("cards").get_children():
+			if child.value == 11 and dealer_score > 21:
+				dealer_score -= 10
+				
+	return dealer_score
 	
 func _on_first_button_pressed():
 	de_gayify_the_cards()
@@ -329,6 +349,7 @@ func _on_dont_swap_button_pressed():
 	stand = 0
 	$hit_ui.show()
 	$deal_ui.show()
+	update_scores()
 	
 func _on_stand_button_pressed():
 	if turn == "dealer":
