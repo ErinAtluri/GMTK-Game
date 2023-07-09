@@ -72,6 +72,16 @@ func _ready():
 		
 		$sfx.set_stream(get_node("/root/Globals").kaching)
 		$sfx.play()
+	else:
+		if get_node("/root/Globals").ozo_anger == 2:
+			match randi() % 2:
+				0:
+					var new_dialog = Dialogic.start("OzoAnger2.1")
+					add_child(new_dialog)
+				1:
+					var new_dialog = Dialogic.start("OzoAnger2.2")
+					add_child(new_dialog)
+			# istg if i lose one more time
 		
 	get_node("/root/Globals").tips = 0
 	
@@ -351,37 +361,38 @@ func payout() -> void:
 		
 		$sfx.set_stream(get_node("/root/Globals").kaching)
 		$sfx.play()
+		
+		match randi() % 3:
+			0:
+				var new_dialog = Dialogic.start("OzoLose" + str((randi() % 3) + 1))
+				add_child(new_dialog)
+			1:
+				var new_dialog = Dialogic.start("TippyLose" + str((randi() % 3) + 1))
+				add_child(new_dialog)
+			2:
+				var new_dialog = Dialogic.start("FinniganLose" + str((randi() % 4) + 1))
+				add_child(new_dialog)
 	else:
 		match winners[randi() % winners.size()]:
 			"gangster":
 				play_audio(get_node("/root/Globals").ozo_win_sounds)
-				var new_dialog = Dialogic.start("OzoWin2")
+				var new_dialog = Dialogic.start("OzoWin" + str((randi() % 3) + 1))
 				add_child(new_dialog)
 			"flirt":
 				play_audio(get_node("/root/Globals").tippy_win_sounds)
-				var new_dialog = Dialogic.start("TippyWin2")
+				var new_dialog = Dialogic.start("TippyWin" + str((randi() % 3) + 1))
 				add_child(new_dialog)
 			"rich":
 				play_audio(get_node("/root/Globals").ceo_win_sounds)
-				var new_dialog = Dialogic.start("FinniganWin2")
+				var new_dialog = Dialogic.start("OzoWin" + str((randi() % 3) + 1))
 				add_child(new_dialog)
 		
 	if not "gangster" in winners:
 		get_node("/root/Globals").ozo_anger += 1
+		
 		match get_node("/root/Globals").ozo_anger:
-			1:
-				var new_dialog = Dialogic.start("OzoAnger1")
-				add_child(new_dialog)
 			2:
 				$patrons/gangster/gun.show()
-				
-				match randi() % 2:
-					0:
-						var new_dialog = Dialogic.start("OzoAnger2.1")
-						add_child(new_dialog)
-					1:
-						var new_dialog = Dialogic.start("OzoAnger2.2")
-						add_child(new_dialog)
 			3:
 				get_tree().change_scene("res://game_over.tscn")
 				
