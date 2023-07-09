@@ -362,6 +362,18 @@ func payout() -> void:
 		
 	if not "gangster" in winners:
 		get_node("/root/Globals").ozo_anger += 1
+		match get_node("/root/Globals").ozo_anger:
+			1:
+				var new_dialog = Dialogic.start("OzoAnger1")
+				add_child(new_dialog)
+			2:
+				match randi() % 2:
+					0:
+						var new_dialog = Dialogic.start("OzoAnger2.1")
+						add_child(new_dialog)
+					1:
+						var new_dialog = Dialogic.start("OzoAnger2.2")
+					add_child(new_dialog)
 	if not "flirt" in winners:
 		get_node("/root/Globals").tippy_happy = 0
 		
