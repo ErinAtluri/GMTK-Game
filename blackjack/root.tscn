@@ -43,11 +43,11 @@ font_data = ExtResource( 10 )
 size = 120
 font_data = ExtResource( 10 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=11]
 size = 60
 font_data = ExtResource( 10 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=7]
 size = 60
 font_data = ExtResource( 10 )
 
@@ -428,6 +428,7 @@ margin_right = 1384.0
 margin_bottom = 988.0
 
 [node name="day_popup" type="Node2D" parent="."]
+visible = false
 z_index = 2
 
 [node name="end_of_day_bg" type="Sprite" parent="day_popup"]
@@ -442,14 +443,6 @@ margin_bottom = 174.0
 custom_fonts/font = SubResource( 10 )
 text = "Day 1"
 
-[node name="money_needed" type="Label" parent="day_popup"]
-margin_left = 438.0
-margin_top = 766.0
-margin_right = 722.0
-margin_bottom = 826.0
-custom_fonts/font = SubResource( 7 )
-text = "$"
-
 [node name="label_yeehaw" type="Label" parent="day_popup"]
 margin_left = 438.0
 margin_top = 336.0
@@ -459,7 +452,39 @@ custom_fonts/font = SubResource( 11 )
 text = "Savings:
 House Earning:
 Tips:
-Money Needed:"
+Money Needed:                 $8000"
+
+[node name="savings" type="Label" parent="day_popup"]
+margin_left = 1189.0
+margin_top = 321.0
+margin_right = 1473.0
+margin_bottom = 381.0
+custom_fonts/font = SubResource( 7 )
+text = "$"
+
+[node name="house" type="Label" parent="day_popup"]
+margin_left = 1191.0
+margin_top = 389.0
+margin_right = 1475.0
+margin_bottom = 449.0
+custom_fonts/font = SubResource( 7 )
+text = "$"
+
+[node name="tips" type="Label" parent="day_popup"]
+margin_left = 1190.0
+margin_top = 455.0
+margin_right = 1474.0
+margin_bottom = 515.0
+custom_fonts/font = SubResource( 7 )
+text = "$"
+
+[node name="money_needed" type="Label" parent="day_popup"]
+margin_left = 1188.0
+margin_top = 657.0
+margin_right = 1472.0
+margin_bottom = 717.0
+custom_fonts/font = SubResource( 7 )
+text = "$"
 
 [node name="bar" type="ColorRect" parent="day_popup"]
 margin_left = 422.0
