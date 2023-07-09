@@ -223,17 +223,6 @@ func patron_stand(patron) -> void:
 	
 	for child in $patrons.get_children():
 		child.get_node("arrow").hide()
-		
-	match patron.name:
-		"gangster":
-			var new_dialog = Dialogic.start("OzoStand")
-			$dialog.add_child(new_dialog)
-		"flirt":
-			var new_dialog = Dialogic.start("TippyStand")
-			$dialog.add_child(new_dialog)
-		"rich":
-			var new_dialog = Dialogic.start("FinniganStand")
-			$dialog.add_child(new_dialog)
 	
 	if stand >= 3 and dealer_stand:
 		state = State.Payout
@@ -241,6 +230,17 @@ func patron_stand(patron) -> void:
 		$hit_ui.hide()
 		payout()
 	else:
+		match patron.name:
+			"gangster":
+				var new_dialog = Dialogic.start("OzoStand")
+				$dialog.add_child(new_dialog)
+			"flirt":
+				var new_dialog = Dialogic.start("TippyStand")
+				$dialog.add_child(new_dialog)
+			"rich":
+				var new_dialog = Dialogic.start("FinniganStand")
+				$dialog.add_child(new_dialog)
+			
 		match turn:
 			"gangster":
 				turn = "flirt"
@@ -537,7 +537,16 @@ func _on_dont_swap_button_pressed():
 	
 	for child in $patrons.get_children():
 		child.place_bet()
-		child.calc_double_down()
+		if child.calc_double_down():
+			if child.name == "rich":
+				var new_dialog = Dialogic.start("FinniganDoubledown")
+				$dialog.add_child(new_dialog)
+			elif child.name == "flirt":
+				var new_dialog = Dialogic.start("TippyDoubledown")
+				$dialog.add_child(new_dialog)
+			elif child.name == "gangster":
+				var new_dialog = Dialogic.start("OzoDoubledown")
+				$dialog.add_child(new_dialog)
 		
 	state = State.Hit
 	for patron in $patrons.get_children():
@@ -594,6 +603,11 @@ func _on_day_cont_button_pressed():
 	
 	if get_node("/root/Globals").personal >= 8000:
 		get_tree().change_scene("res://win.tscn")
+	if get_node("/root/Globals").ozo_anger == 2:
+			$sfx.set_stream(get_node("/root/Globals").growl)
+			$sfx.play()
+			var new_dialog = Dialogic.start("OzoAnger2.1")
+			$dialog.add_child(new_dialog)
 	
 func _on_pause_button_pressed():
 	$pause_popup.show()
