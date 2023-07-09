@@ -4,6 +4,7 @@ const GRAY : Color = Color(0.5, 0.5, 0.5)
 const WHITE : Color = Color(1, 1, 1)
 
 enum State {
+	Letter,
 	Deal,
 	Swap,
 	Bet,
@@ -15,12 +16,13 @@ var card_obj = preload("res://Card/card.tscn")
 
 var deck : Array = []
 var card_count : int = 0
-var state = State.Deal
+var state = State.Letter
 var selected_card : int = 0
 var turn : String = "gangster"
 var hit : bool = false
 var dealer_stand : bool = false
 var stand : int = 0
+var timer_on : bool = false
 
 var house_wallet : int = 200
 var personal_wallet : int = 0
@@ -43,10 +45,24 @@ func _ready():
 	
 	set_top_three()
 	de_gayify_the_cards()
-	$deal_ui/deck_h_box/first.modulate = WHITE
 	
+	$deal_ui/deck_h_box/first.modulate = WHITE
 	$base_ui/house_wallet.text = "$" + str(house_wallet)
 	$base_ui/personal_wallet.text = "$" + str(personal_wallet)
+	
+	if get_node("/root/Globals").letter_shown:
+		state = State.Deal
+	else:
+		$letter.show()
+		
+	if get_node("/root/Globals").day_start:
+		state = State.Letter
+		get_node("/root/Globals").day_start = false
+		$day_popup/day_label.text = "Day " + \
+			str(get_node("/root/Globals").roun_d / 5)
+		$day_popup/personal_money.text = "Money: $" + \
+			str(get_node("/root/Globals").personal)
+		$day_popup.show()
 	
 func _process(delta):
 	if state == State.Hit and !hit:
@@ -264,19 +280,40 @@ func payout() -> void:
 	$base_ui/personal_wallet.text = "$" + str(personal_wallet)
 	
 	$base_ui/scoreboard_label.text = "Winners:\n"
+	
 	for winner in winners:
 		var winner_name : String = "null"
 		
 		match winner:
 			"gangster":
 				winner_name = "Ozo"
+				get_node("/root/Globals").ozo_anger = 0
 			"flirt":
 				winner_name = "Tippy"
+				get_node("/root/Globals").tippy_happy += 1
 			"rich":
 				winner_name = "Fin"
 				
 		$base_ui/scoreboard_label.text += winner_name + "\n"
+		
+	if not "gangster" in winners:
+		get_node("/root/Globals").ozo_anger += 1
+	if not "flirt" in winners:
+		get_node("/root/Globals").tippy_happy = 0
+		
+	if get_node("/root/Globals").ozo_anger <= 1:
+		$patrons/gangster/gun.hide()
+	elif get_node("/root/Globals").ozo_anger == 2:
+		$patrons/gangster/gun.show()
+	else:
+		pass # death screen
+	
 	$payout_ui.show()
+	
+	timer_on = true
+	$timer.start(2.0)
+	$timer.connect("timeout", self, "hide_cards_after_timeout", \
+		[ ], CONNECT_ONESHOT)
 	
 func update_scores() -> void:
 	var ozo_score : int = $patrons/gangster.get_score()
@@ -310,20 +347,31 @@ func play_audio(arr : Array) -> void:
 	$sfx.set_stream(arr[randi() % size - 1])
 	$sfx.play()
 	
+func hide_cards_after_timeout() -> void:
+	timer_on = false
+	
+	for patron in $patrons.get_children():
+		patron.get_node("cards").hide()
+		
+	$dealer/cards.hide()
+	
 func _on_first_button_pressed():
-	de_gayify_the_cards()
-	$deal_ui/deck_h_box/first.modulate = WHITE
-	selected_card = 0
+	if state == State.Deal or state == State.Hit:
+		de_gayify_the_cards()
+		$deal_ui/deck_h_box/first.modulate = WHITE
+		selected_card = 0
 	
 func _on_second_button_pressed():
-	de_gayify_the_cards()
-	$deal_ui/deck_h_box/second.modulate = WHITE
-	selected_card = 1
+	if state == State.Deal or state == State.Hit:
+		de_gayify_the_cards()
+		$deal_ui/deck_h_box/second.modulate = WHITE
+		selected_card = 1
 	
 func _on_third_button_pressed():
-	de_gayify_the_cards()
-	$deal_ui/deck_h_box/third.modulate = WHITE
-	selected_card = 2
+	if state == State.Deal or state == State.Hit:
+		de_gayify_the_cards()
+		$deal_ui/deck_h_box/third.modulate = WHITE
+		selected_card = 2
 	
 func _on_swap_button_pressed():
 	var temp_card = null
@@ -416,4 +464,15 @@ func _on_next_round_button_pressed():
 	get_node("/root/Globals").house = house_wallet
 	get_node("/root/Globals").personal = personal_wallet
 	get_node("/root/Globals").roun_d += 1
+	if get_node("/root/Globals").roun_d % 5 == 0:
+		get_node("/root/Globals").day_start = true
 	get_tree().reload_current_scene()
+	
+func _on_continue_button_pressed():
+	state = State.Deal
+	$letter.hide()
+	get_node("/root/Globals").letter_shown = true
+	
+func _on_day_cont_button_pressed():
+	state = State.Deal
+	$day_popup.hide()

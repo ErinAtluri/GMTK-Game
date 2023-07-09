@@ -42,10 +42,11 @@ func calc_double_down() -> bool:
 	hit_once = false
 	
 	if score >= 10 and score <= 12:
-		$bets/bet_2.show()
-		$bets/label.text = "$400"
-		bet = 400
-		return true
+		if randi() % 10 == 0 or name == "rich":
+			$bets/bet_2.show()
+			$bets/label.text = "$400"
+			bet = 400
+			return true
 		
 	return false
 	
@@ -55,7 +56,7 @@ func hit() -> void:
 	
 	if score < 16:
 		emit_signal("hit", self)
-	elif score == 17:
+	elif score == 16 or score == 17:
 		randomize()
 		if randi() % 2 == 0:
 			emit_signal("hit", self)
