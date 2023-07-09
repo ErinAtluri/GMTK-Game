@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Assets/Art/bg.png" type="Texture" id=1]
 [ext_resource path="res://Gambler/gangster.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Assets/Audio/music.wav" type="AudioStream" id=15]
 [ext_resource path="res://Assets/Ui/Pause Icon.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Ui/slider button.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Ui/EndOfDayScreen.png" type="Texture" id=18]
 
 [sub_resource type="DynamicFont" id=2]
 size = 60
@@ -38,7 +39,15 @@ font_data = ExtResource( 10 )
 size = 60
 font_data = ExtResource( 10 )
 
+[sub_resource type="DynamicFont" id=10]
+size = 120
+font_data = ExtResource( 10 )
+
 [sub_resource type="DynamicFont" id=7]
+size = 60
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=11]
 size = 60
 font_data = ExtResource( 10 )
 
@@ -419,29 +428,44 @@ margin_right = 1384.0
 margin_bottom = 988.0
 
 [node name="day_popup" type="Node2D" parent="."]
-visible = false
 z_index = 2
 
-[node name="color_rect" type="ColorRect" parent="day_popup"]
-margin_right = 1930.0
-margin_bottom = 1086.0
-color = Color( 0.196078, 0.141176, 0.176471, 1 )
+[node name="end_of_day_bg" type="Sprite" parent="day_popup"]
+texture = ExtResource( 18 )
+centered = false
 
 [node name="day_label" type="Label" parent="day_popup"]
-margin_left = 292.0
-margin_top = 392.0
-margin_right = 576.0
-margin_bottom = 452.0
-custom_fonts/font = SubResource( 7 )
+margin_left = 798.0
+margin_top = 54.0
+margin_right = 1095.0
+margin_bottom = 174.0
+custom_fonts/font = SubResource( 10 )
 text = "Day 1"
 
-[node name="personal_money" type="Label" parent="day_popup"]
-margin_left = 296.0
-margin_top = 498.0
-margin_right = 580.0
-margin_bottom = 558.0
+[node name="money_needed" type="Label" parent="day_popup"]
+margin_left = 438.0
+margin_top = 766.0
+margin_right = 722.0
+margin_bottom = 826.0
 custom_fonts/font = SubResource( 7 )
-text = "Money: $0"
+text = "$"
+
+[node name="label_yeehaw" type="Label" parent="day_popup"]
+margin_left = 438.0
+margin_top = 336.0
+margin_right = 866.0
+margin_bottom = 585.0
+custom_fonts/font = SubResource( 11 )
+text = "Savings:
+House Earning:
+Tips:
+Money Needed:"
+
+[node name="bar" type="ColorRect" parent="day_popup"]
+margin_left = 422.0
+margin_top = 598.0
+margin_right = 1469.0
+margin_bottom = 609.0
 
 [node name="day_cont_button" type="Button" parent="day_popup"]
 margin_left = 1606.0
