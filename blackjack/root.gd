@@ -355,10 +355,16 @@ func payout() -> void:
 		match winners[randi() % winners.size()]:
 			"gangster":
 				play_audio(get_node("/root/Globals").ozo_win_sounds)
+				var new_dialog = Dialogic.start("OzoWin2")
+				add_child(new_dialog)
 			"flirt":
 				play_audio(get_node("/root/Globals").tippy_win_sounds)
+				var new_dialog = Dialogic.start("TippyWin2")
+				add_child(new_dialog)
 			"rich":
 				play_audio(get_node("/root/Globals").ceo_win_sounds)
+				var new_dialog = Dialogic.start("FinniganWin2")
+				add_child(new_dialog)
 		
 	if not "gangster" in winners:
 		get_node("/root/Globals").ozo_anger += 1
@@ -367,22 +373,23 @@ func payout() -> void:
 				var new_dialog = Dialogic.start("OzoAnger1")
 				add_child(new_dialog)
 			2:
+				$patrons/gangster/gun.show()
+				
 				match randi() % 2:
 					0:
 						var new_dialog = Dialogic.start("OzoAnger2.1")
 						add_child(new_dialog)
 					1:
 						var new_dialog = Dialogic.start("OzoAnger2.2")
-					add_child(new_dialog)
+						add_child(new_dialog)
+			3:
+				get_tree().change_scene("res://game_over.tscn")
+				
 	if not "flirt" in winners:
 		get_node("/root/Globals").tippy_happy = 0
 		
 	if get_node("/root/Globals").ozo_anger <= 1:
 		$patrons/gangster/gun.hide()
-	elif get_node("/root/Globals").ozo_anger == 2:
-		$patrons/gangster/gun.show()
-	else:
-		get_tree().change_scene("res://game_over.tscn")
 	
 	$payout_ui.show()
 	
