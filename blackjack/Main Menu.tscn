@@ -35,8 +35,8 @@ rect_pivot_offset = Vector2( 2172, 1007 )
 script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 962.284, 540.875 )
-scale = Vector2( 0.684327, 0.685873 )
+position = Vector2( 955, 543 )
+scale = Vector2( 0.700863, 0.71754 )
 texture = ExtResource( 8 )
 
 [node name="Play Button" type="Button" parent="."]
@@ -134,6 +134,7 @@ icon = ExtResource( 6 )
 flat = true
 
 [node name="Intel Menu" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="BG" type="ColorRect" parent="Intel Menu"]
 anchor_right = 1.0
@@ -193,10 +194,10 @@ valign = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="Intel Menu"]
 anchor_bottom = 1.0
-margin_left = 44.0
-margin_top = 773.0
-margin_right = 356.0
-margin_bottom = -1.0
+margin_left = 63.0
+margin_top = 772.0
+margin_right = 375.0
+margin_bottom = -2.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Intel Menu/CenterContainer"]
 margin_right = 312.0
