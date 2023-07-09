@@ -310,25 +310,36 @@ func _on_third_button_pressed():
 	selected_card = 2
 	
 func _on_swap_button_pressed():
+	var temp_card = null
 	var temp_0 = null
 	var temp_1 = null
 	
 	temp_0 = $patrons/gangster/cards.get_child(0).duplicate()
+	temp_0.suit = $patrons/gangster/cards.get_child(0).suit
+	temp_0.value = $patrons/gangster/cards.get_child(0).value
 	temp_1 = $patrons/gangster/cards.get_child(1).duplicate()
+	temp_1.suit = $patrons/gangster/cards.get_child(1).suit
+	temp_1.value = $patrons/gangster/cards.get_child(1).value
 	
 	for child in $patrons/gangster/cards.get_children():
 		$patrons/gangster/cards.remove_child(child)
 		child.queue_free()
 		
-	$patrons/gangster/cards.add_child($patrons/rich/cards.get_child(0).duplicate())
-	$patrons/gangster/cards.add_child($patrons/rich/cards.get_child(1).duplicate())
+	for i in range(2):
+		temp_card = $patrons/rich/cards.get_child(i).duplicate()
+		temp_card.suit = $patrons/rich/cards.get_child(i).suit
+		temp_card.value = $patrons/rich/cards.get_child(i).value
+		$patrons/gangster/cards.add_child(temp_card)
 	
 	for child in $patrons/rich/cards.get_children():
 		$patrons/rich/cards.remove_child(child)
 		child.queue_free()
 		
-	$patrons/rich/cards.add_child($patrons/flirt/cards.get_child(0).duplicate())
-	$patrons/rich/cards.add_child($patrons/flirt/cards.get_child(1).duplicate())
+	for i in range(2):
+		temp_card = $patrons/flirt/cards.get_child(i).duplicate()
+		temp_card.suit = $patrons/flirt/cards.get_child(i).suit
+		temp_card.value = $patrons/flirt/cards.get_child(i).value
+		$patrons/rich/cards.add_child(temp_card)
 	
 	for child in $patrons/flirt/cards.get_children():
 		$patrons/flirt/cards.remove_child(child)
@@ -336,6 +347,8 @@ func _on_swap_button_pressed():
 		
 	$patrons/flirt/cards.add_child(temp_0)
 	$patrons/flirt/cards.add_child(temp_1)
+	
+	update_scores()
 	
 func _on_dont_swap_button_pressed():
 	var card = deck[selected_card].duplicate()
