@@ -70,7 +70,7 @@ func _ready():
 			str(get_node("/root/Globals").house * 0.25)
 		$day_popup/tips.text = "$" + \
 			str(get_node("/root/Globals").tips)
-		$day_popup/money_needed.text = "$" + str(1800 - personal_wallet)
+		$day_popup/money_needed.text = "$" + str(800 - personal_wallet)
 		$day_popup.show()
 		
 		$sfx.set_stream(get_node("/root/Globals").kaching)
@@ -598,7 +598,7 @@ func _on_next_round_button_pressed():
 	if get_node("/root/Globals").house <= 0 or house_wallet <= 0:
 		get_tree().change_scene("res://bankrupt.tscn")
 	else:
-		if get_node("/root/Globals").roun_d >= 21:
+		if get_node("/root/Globals").roun_d >= 9:
 			get_tree().change_scene("res://fail.tscn")
 		get_tree().reload_current_scene()
 	
@@ -614,7 +614,7 @@ func _on_day_cont_button_pressed():
 	state = State.Deal
 	$day_popup.hide()
 	
-	if get_node("/root/Globals").personal >= 1800:
+	if get_node("/root/Globals").personal >= 800:
 		get_tree().change_scene("res://win.tscn")
 	if get_node("/root/Globals").ozo_anger == 2:
 		$patrons/gangster/gun.show()
