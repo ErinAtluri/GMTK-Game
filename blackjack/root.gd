@@ -511,6 +511,9 @@ func _on_continue_button_pressed():
 	$letter.hide()
 	get_node("/root/Globals").letter_shown = true
 	
+	var new_dialog = Dialogic.start("Beginning")
+	add_child(new_dialog)
+	
 func _on_day_cont_button_pressed():
 	state = State.Deal
 	$day_popup.hide()
