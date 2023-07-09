@@ -544,13 +544,13 @@ func _on_dont_swap_button_pressed():
 		child.place_bet()
 		if child.calc_double_down():
 			if child.name == "rich":
-				var new_dialog = Dialogic.start("FinniganDoubledown")
+				var new_dialog = Dialogic.start("FinniganDoubleDown")
 				$dialog.add_child(new_dialog)
 			elif child.name == "flirt":
-				var new_dialog = Dialogic.start("TippyDoubledown")
+				var new_dialog = Dialogic.start("TippyDoubleDown")
 				$dialog.add_child(new_dialog)
 			elif child.name == "gangster":
-				var new_dialog = Dialogic.start("OzoDoubledown")
+				var new_dialog = Dialogic.start("OzoDoubleDown")
 				$dialog.add_child(new_dialog)
 		
 	state = State.Hit
