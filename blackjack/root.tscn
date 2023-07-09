@@ -236,7 +236,7 @@ rotation = -0.308491
 
 [node name="money_bg" type="ColorRect" parent="base_ui"]
 self_modulate = Color( 1, 1, 1, 0.529412 )
-margin_right = 329.0
+margin_right = 347.0
 margin_bottom = 245.0
 
 [node name="house_wallet" type="Label" parent="base_ui"]
