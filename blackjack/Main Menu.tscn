@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Fonts/josefin-sans/JosefinSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Ui/Quit Button.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Assets/Art/Profiles/flirtProfile.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Art/Profiles/fishProfile.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Art/Profiles/ozoProfile.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Audio/music.wav" type="AudioStream" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 198
@@ -253,6 +254,9 @@ rect_pivot_offset = Vector2( 524, 293 )
 custom_fonts/normal_font = SubResource( 4 )
 text = "Ozo is a completely normal civilian. On the surface, he was a nepo baby born into mass amounts of wealth, which he uses to run the city’s successful laundry franchise. What most don’t know, however, is that he is also the leader of the criminal underbelly of the city, lead by him completely anonymously. Simply known to his mafia crew as The Mafioso, he has tactically taken down opposing crews and gathered money throughout the city. Driven by success, and with a bit of a fear of failure, he can’t stand to lose for too long.
 "
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
 
 [connection signal="pressed" from="Play Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Play Button" to="." method="_on_Play_Button_pressed"]

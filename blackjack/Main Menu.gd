@@ -2,9 +2,10 @@ extends Control
 
 
 func _ready():
-	pass
+	$AudioStreamPlayer.play()
 	
 func _on_Play_Button_pressed():
+	get_node("/root/Globals").reset()
 	get_tree().change_scene("res://root.tscn")
 
 
@@ -14,7 +15,6 @@ func _on_Credits_Button_pressed():
 
 func _on_Quit_Button_pressed():
 	get_tree().quit()
-
 
 
 func _on_Back_pressed():

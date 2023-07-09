@@ -59,3 +59,16 @@ func _ready():
 	growl = load("res://Assets/Audio/Ozo_11Growl.wav")
 	swap = load("res://Assets/Audio/swap.wav")
 	win = load("res://Assets/Audio/win.wav")
+
+
+func reset():
+	house = 200
+	personal = 0
+	tips = 0
+
+	roun_d = 0
+	letter_shown = false
+	day_start = false
+
+	ozo_anger = 0
+	tippy_happy = 0
