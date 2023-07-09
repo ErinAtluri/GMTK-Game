@@ -68,11 +68,13 @@ font_data = ExtResource( 10 )
 script = ExtResource( 5 )
 
 [node name="sfx" type="AudioStreamPlayer" parent="."]
+bus = "sfx"
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
 volume_db = -5.368
 autoplay = true
+bus = "music"
 
 [node name="timer" type="Timer" parent="."]
 
