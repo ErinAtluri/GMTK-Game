@@ -82,6 +82,23 @@ func _process(delta):
 			patron_stand(patron)
 		else:
 			patron.hit()
+	elif state == State.Deal:
+		for child in $patrons.get_children():
+			child.get_node("arrow").hide()
+			
+		match card_count:
+			0:
+				$patrons/gangster.get_node("arrow").show()
+			1:
+				$patrons/flirt.get_node("arrow").show()
+			2:
+				$patrons/rich.get_node("arrow").show()
+			4:
+				$patrons/gangster.get_node("arrow").show()
+			5:
+				$patrons/flirt.get_node("arrow").show()
+			6:
+				$patrons/rich.get_node("arrow").show()
 	
 func set_deck() -> void:
 	for i in range(13):
@@ -157,6 +174,7 @@ func patron_clicked(patron : Object) -> void:
 					turn = "rich"
 				"rich":
 					deal_card($patrons/rich)
+					$patrons/rich.get_node("arrow").hide()
 					turn = "dealer"
 				_:
 					pass
@@ -164,6 +182,11 @@ func patron_clicked(patron : Object) -> void:
 func patron_hit(patron) -> void:
 	# patron.bark("hit")
 	hit = true
+	
+	for child in $patrons.get_children():
+		child.get_node("arrow").hide()
+		
+	patron.get_node("arrow").show()
 	
 	match patron.name:
 		"gangster":
@@ -177,6 +200,9 @@ func patron_stand(patron) -> void:
 	# patron.bark("stand")
 	hit = false
 	stand += 1
+	
+	for child in $patrons.get_children():
+		child.get_node("arrow").hide()
 	
 	if stand >= 3 and dealer_stand:
 		state = State.Payout
