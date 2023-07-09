@@ -201,10 +201,16 @@ func patron_hit(patron) -> void:
 	match patron.name:
 		"gangster":
 			play_audio(get_node("/root/Globals").ozo_talk_sounds)
+			var new_dialog = Dialogic.start("OzoHit")
+			add_child(new_dialog)
 		"flirt":
 			play_audio(get_node("/root/Globals").tippy_talk_sounds)
+			var new_dialog = Dialogic.start("TippyHit")
+			add_child(new_dialog)
 		"rich":
 			play_audio(get_node("/root/Globals").ceo_talk_sounds)
+			var new_dialog = Dialogic.start("FinniganHit")
+			add_child(new_dialog)
 	
 func patron_stand(patron) -> void:
 	# patron.bark("stand")
@@ -213,6 +219,17 @@ func patron_stand(patron) -> void:
 	
 	for child in $patrons.get_children():
 		child.get_node("arrow").hide()
+		
+	match patron.name:
+		"gangster":
+			var new_dialog = Dialogic.start("OzoStand")
+			add_child(new_dialog)
+		"flirt":
+			var new_dialog = Dialogic.start("TippyStand")
+			add_child(new_dialog)
+		"rich":
+			var new_dialog = Dialogic.start("FinniganStand")
+			add_child(new_dialog)
 	
 	if stand >= 3 and dealer_stand:
 		state = State.Payout
