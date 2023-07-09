@@ -344,7 +344,7 @@ func payout() -> void:
 	elif get_node("/root/Globals").ozo_anger == 2:
 		$patrons/gangster/gun.show()
 	else:
-		pass # death screen
+		get_tree().change_scene("res://game_over.tscn")
 	
 	$payout_ui.show()
 	
