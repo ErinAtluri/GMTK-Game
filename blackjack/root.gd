@@ -48,6 +48,9 @@ func _ready():
 	$base_ui/house_wallet.text = "$" + str(house_wallet)
 	$base_ui/personal_wallet.text = "$" + str(personal_wallet)
 	
+	$sfx.set_stream(get_node("/root/Globals").ceo_talk_sounds[0])
+	$sfx.play()
+	
 func _process(delta):
 	if state == State.Hit and !hit:
 		if turn == "dealer":
