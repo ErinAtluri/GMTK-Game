@@ -368,7 +368,7 @@ func payout() -> void:
 				get_node("/root/Globals").tips += 50 * \
 					get_node("/root/Globals").tippy_happy
 				get_node("/root/Globals").personal += get_node("/root/Globals").tips
-				$base_ui/personal_wallet.text = str(get_node("/root/Globals").personal)
+				$base_ui/personal_wallet.text = "$" + str(get_node("/root/Globals").personal)
 			"rich":
 				winner_name = "Fin"
 				
