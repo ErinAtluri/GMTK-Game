@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Art/bg.png" type="Texture" id=1]
 [ext_resource path="res://Gambler/gangster.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Assets/Fonts/josefin-sans/JosefinSans-Regular.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Assets/Ui/Player Wallet.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Ui/House Wallet.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Ui/winPanel.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=2]
 size = 60
@@ -192,6 +193,10 @@ custom_fonts/font = SubResource( 2 )
 text = "$0"
 
 [node name="scoreboard_bg" type="Sprite" parent="base_ui"]
+position = Vector2( 25, 622 )
+scale = Vector2( 0.696607, 0.854582 )
+texture = ExtResource( 13 )
+centered = false
 
 [node name="house_wallet_img" type="Sprite" parent="base_ui"]
 position = Vector2( 86, 65 )
@@ -204,10 +209,10 @@ scale = Vector2( 0.202, 0.199 )
 texture = ExtResource( 11 )
 
 [node name="scoreboard_label" type="Label" parent="base_ui"]
-margin_left = 93.0
-margin_top = 619.0
-margin_right = 312.0
-margin_bottom = 931.0
+margin_left = 68.0
+margin_top = 695.0
+margin_right = 287.0
+margin_bottom = 1007.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Score:

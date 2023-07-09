@@ -257,7 +257,17 @@ func payout() -> void:
 	
 	$base_ui/scoreboard_label.text = "Winners:\n"
 	for winner in winners:
-		$base_ui/scoreboard_label.text += winner + "\n"
+		var winner_name : String = "null"
+		
+		match winner:
+			"gangster":
+				winner_name = "Ozo"
+			"flirt":
+				winner_name = "Tippy"
+			"rich":
+				winner_name = "Fin"
+				
+		$base_ui/scoreboard_label.text += winner_name + "\n"
 	$payout_ui.show()
 	
 func update_scores() -> void:
