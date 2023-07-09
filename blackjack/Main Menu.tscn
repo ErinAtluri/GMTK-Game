@@ -55,8 +55,8 @@ margin_right = 1017.0
 margin_bottom = 534.0
 rect_pivot_offset = Vector2( -602, 0 )
 custom_fonts/font = SubResource( 1 )
-text = "Dealer's
-Choice"
+text = "House's
+Edge"
 align = 1
 valign = 1
 
