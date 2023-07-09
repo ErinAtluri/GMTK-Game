@@ -4,6 +4,7 @@ const GRAY : Color = Color(0.5, 0.5, 0.5)
 const WHITE : Color = Color(1, 1, 1)
 
 enum State {
+	Letter,
 	Deal,
 	Swap,
 	Bet,
@@ -15,7 +16,7 @@ var card_obj = preload("res://Card/card.tscn")
 
 var deck : Array = []
 var card_count : int = 0
-var state = State.Deal
+var state = State.Letter
 var selected_card : int = 0
 var turn : String = "gangster"
 var hit : bool = false
@@ -44,10 +45,15 @@ func _ready():
 	
 	set_top_three()
 	de_gayify_the_cards()
-	$deal_ui/deck_h_box/first.modulate = WHITE
 	
+	$deal_ui/deck_h_box/first.modulate = WHITE
 	$base_ui/house_wallet.text = "$" + str(house_wallet)
 	$base_ui/personal_wallet.text = "$" + str(personal_wallet)
+	
+	if get_node("/root/Globals").letter_shown:
+		state = State.Deal
+	else:
+		$letter.show()
 	
 func _process(delta):
 	if state == State.Hit and !hit:
@@ -435,3 +441,9 @@ func _on_next_round_button_pressed():
 	get_node("/root/Globals").personal = personal_wallet
 	get_node("/root/Globals").roun_d += 1
 	get_tree().reload_current_scene()
+	
+func _on_continue_button_pressed():
+	state = State.Deal
+	
+	$letter.hide()
+	get_node("/root/Globals").letter_shown = true

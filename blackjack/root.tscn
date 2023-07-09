@@ -370,6 +370,18 @@ enabled_focus_mode = 0
 text = "NEXT ROUND"
 flat = true
 
+[node name="letter" type="Node2D" parent="."]
+visible = false
+z_index = 2
+
+[node name="letter_img" type="Sprite" parent="letter"]
+
+[node name="continue_button" type="Button" parent="letter"]
+margin_left = 1098.0
+margin_top = 832.0
+margin_right = 1384.0
+margin_bottom = 988.0
+
 [connection signal="pressed" from="deal_ui/deck_h_box/first/first_button" to="." method="_on_first_button_pressed"]
 [connection signal="pressed" from="deal_ui/deck_h_box/second/second_button" to="." method="_on_second_button_pressed"]
 [connection signal="pressed" from="deal_ui/deck_h_box/third/third_button" to="." method="_on_third_button_pressed"]
@@ -377,6 +389,7 @@ flat = true
 [connection signal="pressed" from="swap_ui/dont_swap_button" to="." method="_on_dont_swap_button_pressed"]
 [connection signal="pressed" from="hit_ui/stand_button" to="." method="_on_stand_button_pressed"]
 [connection signal="pressed" from="payout_ui/next_round_button" to="." method="_on_next_round_button_pressed"]
+[connection signal="pressed" from="letter/continue_button" to="." method="_on_continue_button_pressed"]
 
 [editable path="patrons/gangster"]
 [editable path="patrons/flirt"]
