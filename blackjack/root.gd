@@ -23,6 +23,7 @@ var hit : bool = false
 var dealer_stand : bool = false
 var stand : int = 0
 var timer_on : bool = false
+var tippytip : bool = false
 
 var house_wallet : int = 200
 var personal_wallet : int = 0
@@ -365,6 +366,7 @@ func payout() -> void:
 				get_node("/root/Globals").ozo_anger = 0
 			"flirt":
 				winner_name = "Tippy"
+				tippytip = true
 				get_node("/root/Globals").tippy_happy += 1
 				get_node("/root/Globals").tips += 50 * \
 					get_node("/root/Globals").tippy_happy
@@ -459,11 +461,15 @@ func play_audio(arr : Array) -> void:
 	
 func hide_cards_after_timeout() -> void:
 	timer_on = false
+	tippytip = false
 	
 	for patron in $patrons.get_children():
 		patron.get_node("cards").hide()
 		
 	$dealer/cards.hide()
+	
+	var new_dialog = Dialogic.start("TippyTip" + str((randi() % 2) + 1))
+	$dialog.add_child(new_dialog)
 	
 func _on_first_button_pressed():
 	if state == State.Deal or state == State.Hit:
