@@ -75,6 +75,7 @@ func _ready():
 		$sfx.play()
 	else:
 		if get_node("/root/Globals").ozo_anger == 2:
+			$patrons/gangster/gun.show()
 			$sfx.set_stream(get_node("/root/Globals").growl)
 			$sfx.play()
 			var new_dialog = Dialogic.start("OzoAnger2.1")
@@ -408,11 +409,8 @@ func payout() -> void:
 	if not "gangster" in winners:
 		get_node("/root/Globals").ozo_anger += 1
 		
-		match get_node("/root/Globals").ozo_anger:
-			2:
-				$patrons/gangster/gun.show()
-			3:
-				get_tree().change_scene("res://game_over.tscn")
+		if get_node("/root/Globals").ozo_anger == 3:
+			get_tree().change_scene("res://game_over.tscn")
 				
 	if not "flirt" in winners:
 		get_node("/root/Globals").tippy_happy = 0
@@ -615,6 +613,7 @@ func _on_day_cont_button_pressed():
 	if get_node("/root/Globals").personal >= 8000:
 		get_tree().change_scene("res://win.tscn")
 	if get_node("/root/Globals").ozo_anger == 2:
+		$patrons/gangster/gun.show()
 		$sfx.set_stream(get_node("/root/Globals").growl)
 		$sfx.play()
 		var new_dialog = Dialogic.start("OzoAnger2.1")
