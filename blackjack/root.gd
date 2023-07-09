@@ -266,10 +266,10 @@ func update_scores() -> void:
 	var fin_score : int = $patrons/rich.get_score()
 	var dealer_score : int = get_dealer_score()
 	
-	$base_ui/scoreboard_label.text = "Score:\n4: " + \
-		str(dealer_score) + "\nOzo: " + str(ozo_score) + \
-			"\nTippy: " + str(tippy_score) + "\nFin: " + \
-				str(fin_score)
+	$base_ui/scoreboard_label.text = "Score:\nOzo: " + \
+		str(ozo_score) + "\nTippy: " + str(tippy_score) + \
+			"\nFin: " + str(fin_score) + "\n4: " + \
+				str(dealer_score)
 	
 func get_dealer_score() -> int:
 	var dealer_score : int = 0
