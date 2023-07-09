@@ -286,6 +286,18 @@ func payout() -> void:
 				winner_name = "Fin"
 				
 		$base_ui/scoreboard_label.text += winner_name + "\n"
+		
+	if not "gangster" in winners:
+		get_node("/root/Globals").ozo_anger += 1
+	if not "flirt" in winners:
+		get_node("/root/Globals").tippy_happy = 0
+		
+	if get_node("/root/Globals").ozo_anger <= 1:
+		$patrons/gangster/gun.hide()
+	elif get_node("/root/Globals").ozo_anger == 2:
+		$patrons/gangster/gun.show()
+	else:
+		pass # death screen
 	
 	$payout_ui.show()
 	
