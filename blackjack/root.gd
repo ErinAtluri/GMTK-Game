@@ -515,6 +515,9 @@ func _on_day_cont_button_pressed():
 	state = State.Deal
 	$day_popup.hide()
 	
+	if get_node("/root/Globals").personal >= 8000:
+		get_tree().change_scene("res://win.tscn")
+	
 func _on_pause_button_pressed():
 	$pause_popup.show()
 	
