@@ -141,6 +141,14 @@ func patron_hit(patron) -> void:
 	# patron.bark("hit")
 	hit = true
 	
+	match patron.name:
+		"gangster":
+			play_audio(get_node("/root/Globals").ozo_talk_sounds)
+		"flirt":
+			play_audio(get_node("/root/Globals").tippy_talk_sounds)
+		"rich":
+			play_audio(get_node("/root/Globals").ceo_talk_sounds)
+	
 func patron_stand(patron) -> void:
 	# patron.bark("stand")
 	hit = false
@@ -293,6 +301,14 @@ func get_dealer_score() -> int:
 				dealer_score -= 10
 				
 	return dealer_score
+	
+func play_audio(arr : Array) -> void:
+	if $sfx.playing:
+		return
+		
+	var size : int = arr.size()
+	$sfx.set_stream(arr[randi() % size - 1])
+	$sfx.play()
 	
 func _on_first_button_pressed():
 	de_gayify_the_cards()
