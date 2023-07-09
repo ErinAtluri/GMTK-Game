@@ -54,6 +54,15 @@ func _ready():
 		state = State.Deal
 	else:
 		$letter.show()
+		
+	if get_node("/root/Globals").day_start:
+		state = State.Letter
+		get_node("/root/Globals").day_start = false
+		$day_popup/day_label.text = "Day " + \
+			str(get_node("/root/Globals").roun_d / 5)
+		$day_popup/personal_money.text = "Money: $" + \
+			str(get_node("/root/Globals").personal)
+		$day_popup.show()
 	
 func _process(delta):
 	if state == State.Hit and !hit:
@@ -455,9 +464,15 @@ func _on_next_round_button_pressed():
 	get_node("/root/Globals").house = house_wallet
 	get_node("/root/Globals").personal = personal_wallet
 	get_node("/root/Globals").roun_d += 1
+	if get_node("/root/Globals").roun_d % 5 == 0:
+		get_node("/root/Globals").day_start = true
 	get_tree().reload_current_scene()
 	
 func _on_continue_button_pressed():
 	state = State.Deal
 	$letter.hide()
 	get_node("/root/Globals").letter_shown = true
+	
+func _on_day_cont_button_pressed():
+	state = State.Deal
+	$day_popup.hide()
