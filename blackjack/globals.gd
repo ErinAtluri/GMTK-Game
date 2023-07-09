@@ -4,6 +4,9 @@ var house : int = 200
 var personal : int = 0
 var roun_d : int = 0
 
+var ozo_anger : int = 0
+var tippy_happy : int = 0
+
 var ceo_talk_sounds : Array = []
 var ceo_win_sounds : Array = []
 var ozo_talk_sounds : Array = []

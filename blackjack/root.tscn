@@ -41,6 +41,8 @@ script = ExtResource( 5 )
 [node name="sfx" type="AudioStreamPlayer" parent="."]
 bus = "sfx"
 
+[node name="timer" type="Timer" parent="."]
+
 [node name="bg" type="Sprite" parent="."]
 scale = Vector2( 0.681576, 0.677966 )
 texture = ExtResource( 1 )

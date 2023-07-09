@@ -21,6 +21,7 @@ var turn : String = "gangster"
 var hit : bool = false
 var dealer_stand : bool = false
 var stand : int = 0
+var timer_on : bool = false
 
 var house_wallet : int = 200
 var personal_wallet : int = 0
@@ -264,19 +265,28 @@ func payout() -> void:
 	$base_ui/personal_wallet.text = "$" + str(personal_wallet)
 	
 	$base_ui/scoreboard_label.text = "Winners:\n"
+	
 	for winner in winners:
 		var winner_name : String = "null"
 		
 		match winner:
 			"gangster":
 				winner_name = "Ozo"
+				get_node("/root/Globals").ozo_anger = 0
 			"flirt":
 				winner_name = "Tippy"
+				get_node("/root/Globals").tippy_happy += 1
 			"rich":
 				winner_name = "Fin"
 				
 		$base_ui/scoreboard_label.text += winner_name + "\n"
+	
 	$payout_ui.show()
+	
+	timer_on = true
+	$timer.start(2.0)
+	$timer.connect("timeout", self, "hide_cards_after_timeout", \
+		[ ], CONNECT_ONESHOT)
 	
 func update_scores() -> void:
 	var ozo_score : int = $patrons/gangster.get_score()
@@ -309,6 +319,14 @@ func play_audio(arr : Array) -> void:
 	var size : int = arr.size()
 	$sfx.set_stream(arr[randi() % size - 1])
 	$sfx.play()
+	
+func hide_cards_after_timeout() -> void:
+	timer_on = false
+	
+	for patron in $patrons.get_children():
+		patron.get_node("cards").hide()
+		
+	$dealer/cards.hide()
 	
 func _on_first_button_pressed():
 	de_gayify_the_cards()
