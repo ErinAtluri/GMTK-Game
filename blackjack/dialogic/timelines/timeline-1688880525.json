@@ -1,0 +1,15 @@
+{
+	"events": [
+		{
+			"character": "character-1688865116.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Eugh, that was a rough hand."
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1688880525.json",
+		"name": "OzoAnger1"
+	}
+}
