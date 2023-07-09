@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Fonts/josefin-sans/JosefinSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Ui/Quit Button.png" type="Texture" id=2]
@@ -17,8 +17,16 @@
 size = 198
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=5]
+size = 119
+extra_spacing_top = 26
+extra_spacing_space = 48
+font_data = ExtResource( 1 )
+
 [sub_resource type="DynamicFont" id=2]
 size = 119
+extra_spacing_top = 26
+extra_spacing_space = 48
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -96,25 +104,32 @@ align = 1
 valign = 1
 
 [node name="Credit Menu" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="BG" type="ColorRect" parent="Credit Menu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.215686, 0.231373, 0.254902, 0.956863 )
 
+[node name="Credits2" type="Label" parent="Credit Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 69.0
+rect_pivot_offset = Vector2( -602, 0 )
+custom_fonts/font = SubResource( 5 )
+text = "Credits"
+align = 1
+
 [node name="Credits" type="Label" parent="Credit Menu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -602, 0 )
 custom_fonts/font = SubResource( 2 )
-text = "Credits
-
-Jt
-Ena
-Nolan
-Jonan
-Erin"
+text = "
+Programming: entropy9669
+Art: king_6960, starriewing
+Design/Audio: jteaaa
+Writing: puddleon
+Music: Spog#9896"
 align = 1
 valign = 1
 
