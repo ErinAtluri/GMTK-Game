@@ -48,7 +48,7 @@ func _ready():
 	
 	$deal_ui/deck_h_box/first.modulate = WHITE
 	$base_ui/house_wallet.text = "$" + str(house_wallet)
-	$base_ui/personal_wallet.text = "$" + str(get_node("/root/Globals").personal)
+	$base_ui/personal_wallet.text = "$" + str(personal_wallet)
 	
 	if get_node("/root/Globals").letter_shown:
 		state = State.Deal
@@ -302,6 +302,8 @@ func payout() -> void:
 				if patron_doubled[i] == 400:
 					house_wallet += 200
 			else:
+				house_wallet -= 100
+				
 				match i:
 					0:
 						winners.append("gangster")
@@ -418,6 +420,8 @@ func payout() -> void:
 		$patrons/gangster/gun.hide()
 	
 	$payout_ui.show()
+	
+	get_node("/root/Globals").personal += get_node("/root/Globals").tips
 	
 	timer_on = true
 	$timer.start(2.0)
@@ -587,12 +591,13 @@ func _on_next_round_button_pressed():
 		return
 	get_node("/root/Globals").house = house_wallet
 	get_node("/root/Globals").personal = personal_wallet
-	if get_node("/root/Globals").house <= 0 or house_wallet <= 0:
-		get_tree().change_scene("res://bankrupt.tscn")
 	get_node("/root/Globals").roun_d += 1
 	if get_node("/root/Globals").roun_d % 3 == 0:
 		get_node("/root/Globals").day_start = true
-	get_tree().reload_current_scene()
+	if get_node("/root/Globals").house <= 0 or house_wallet <= 0:
+		get_tree().change_scene("res://bankrupt.tscn")
+	else:
+		get_tree().reload_current_scene()
 	
 func _on_continue_button_pressed():
 	state = State.Deal
