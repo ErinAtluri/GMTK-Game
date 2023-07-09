@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/tippytalk9.wav-48cefc33a73d019cb841c44e92465838.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Tippy Talk Sounds/tippytalk9.wav"
+dest_files=[ "res://.import/tippytalk9.wav-48cefc33a73d019cb841c44e92465838.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

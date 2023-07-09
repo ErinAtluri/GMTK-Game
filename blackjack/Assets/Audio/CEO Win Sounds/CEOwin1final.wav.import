@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/CEOwin1final.wav-e75f5473427acf2701d56a96bc1fc0c5.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/CEO Win Sounds/CEOwin1final.wav"
+dest_files=[ "res://.import/CEOwin1final.wav-e75f5473427acf2701d56a96bc1fc0c5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
