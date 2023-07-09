@@ -70,6 +70,7 @@ func _ready():
 			str(get_node("/root/Globals").house * 0.25)
 		$day_popup/tips.text = "$" + \
 			str(get_node("/root/Globals").tips)
+		$day_popup/money_needed.text = "$" + str(1800 - personal_wallet)
 		$day_popup.show()
 		
 		$sfx.set_stream(get_node("/root/Globals").kaching)
