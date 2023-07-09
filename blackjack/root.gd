@@ -74,20 +74,18 @@ func _ready():
 		$sfx.play()
 	else:
 		if get_node("/root/Globals").ozo_anger == 2:
-			match randi() % 2:
-				0:
-					var new_dialog = Dialogic.start("OzoAnger2.1")
-					add_child(new_dialog)
-				1:
-					var new_dialog = Dialogic.start("OzoAnger2.2")
-					add_child(new_dialog)
-			# istg if i lose one more time
+			$sfx.set_stream(get_node("/root/Globals").growl)
+			$sfx.play()
+			var new_dialog = Dialogic.start("OzoAnger2.1")
+			$dialog.add_child(new_dialog)
 		
 	get_node("/root/Globals").tips = 0
 	
 func _process(delta):
 	if state == State.Hit and !hit:
 		if turn == "dealer":
+			return
+		if $dialog.get_child_count() > 0:
 			return
 			
 		var patron = $patrons.get_node(turn)
@@ -207,10 +205,16 @@ func patron_hit(patron) -> void:
 	match patron.name:
 		"gangster":
 			play_audio(get_node("/root/Globals").ozo_talk_sounds)
+			var new_dialog = Dialogic.start("OzoHit")
+			$dialog.add_child(new_dialog)
 		"flirt":
 			play_audio(get_node("/root/Globals").tippy_talk_sounds)
+			var new_dialog = Dialogic.start("TippyHit")
+			$dialog.add_child(new_dialog)
 		"rich":
 			play_audio(get_node("/root/Globals").ceo_talk_sounds)
+			var new_dialog = Dialogic.start("FinniganHit")
+			$dialog.add_child(new_dialog)
 	
 func patron_stand(patron) -> void:
 	# patron.bark("stand")
@@ -226,6 +230,17 @@ func patron_stand(patron) -> void:
 		$hit_ui.hide()
 		payout()
 	else:
+		match patron.name:
+			"gangster":
+				var new_dialog = Dialogic.start("OzoStand")
+				$dialog.add_child(new_dialog)
+			"flirt":
+				var new_dialog = Dialogic.start("TippyStand")
+				$dialog.add_child(new_dialog)
+			"rich":
+				var new_dialog = Dialogic.start("FinniganStand")
+				$dialog.add_child(new_dialog)
+			
 		match turn:
 			"gangster":
 				turn = "flirt"
@@ -365,27 +380,27 @@ func payout() -> void:
 		match randi() % 3:
 			0:
 				var new_dialog = Dialogic.start("OzoLose" + str((randi() % 3) + 1))
-				add_child(new_dialog)
+				$dialog.add_child(new_dialog)
 			1:
 				var new_dialog = Dialogic.start("TippyLose" + str((randi() % 3) + 1))
-				add_child(new_dialog)
+				$dialog.add_child(new_dialog)
 			2:
 				var new_dialog = Dialogic.start("FinniganLose" + str((randi() % 4) + 1))
-				add_child(new_dialog)
+				$dialog.add_child(new_dialog)
 	else:
 		match winners[randi() % winners.size()]:
 			"gangster":
 				play_audio(get_node("/root/Globals").ozo_win_sounds)
 				var new_dialog = Dialogic.start("OzoWin" + str((randi() % 3) + 1))
-				add_child(new_dialog)
+				$dialog.add_child(new_dialog)
 			"flirt":
 				play_audio(get_node("/root/Globals").tippy_win_sounds)
 				var new_dialog = Dialogic.start("TippyWin" + str((randi() % 3) + 1))
-				add_child(new_dialog)
+				$dialog.add_child(new_dialog)
 			"rich":
 				play_audio(get_node("/root/Globals").ceo_win_sounds)
 				var new_dialog = Dialogic.start("OzoWin" + str((randi() % 3) + 1))
-				add_child(new_dialog)
+				$dialog.add_child(new_dialog)
 		
 	if not "gangster" in winners:
 		get_node("/root/Globals").ozo_anger += 1
@@ -522,7 +537,16 @@ func _on_dont_swap_button_pressed():
 	
 	for child in $patrons.get_children():
 		child.place_bet()
-		child.calc_double_down()
+		if child.calc_double_down():
+			if child.name == "rich":
+				var new_dialog = Dialogic.start("FinniganDoubledown")
+				$dialog.add_child(new_dialog)
+			elif child.name == "flirt":
+				var new_dialog = Dialogic.start("TippyDoubledown")
+				$dialog.add_child(new_dialog)
+			elif child.name == "gangster":
+				var new_dialog = Dialogic.start("OzoDoubledown")
+				$dialog.add_child(new_dialog)
 		
 	state = State.Hit
 	for patron in $patrons.get_children():
@@ -571,7 +595,7 @@ func _on_continue_button_pressed():
 	get_node("/root/Globals").letter_shown = true
 	
 	var new_dialog = Dialogic.start("Beginning")
-	add_child(new_dialog)
+	$dialog.add_child(new_dialog)
 	
 func _on_day_cont_button_pressed():
 	state = State.Deal
@@ -579,6 +603,11 @@ func _on_day_cont_button_pressed():
 	
 	if get_node("/root/Globals").personal >= 8000:
 		get_tree().change_scene("res://win.tscn")
+	if get_node("/root/Globals").ozo_anger == 2:
+			$sfx.set_stream(get_node("/root/Globals").growl)
+			$sfx.play()
+			var new_dialog = Dialogic.start("OzoAnger2.1")
+			$dialog.add_child(new_dialog)
 	
 func _on_pause_button_pressed():
 	$pause_popup.show()
