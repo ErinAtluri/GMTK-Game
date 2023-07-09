@@ -21,3 +21,7 @@ func _on_Quit_Button_pressed():
 
 func _on_Back_pressed():
 	$"Credit Menu".hide()
+
+
+func _on_Intel_Button_pressed():
+	pass # show info about each character
