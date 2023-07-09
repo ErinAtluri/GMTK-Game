@@ -241,6 +241,9 @@ func deal_self() -> void:
 			
 		elif card_count == 7:
 			pass
+			
+		$sfx.set_stream(get_node("/root/Globals").deal)
+		$sfx.play()
 	elif state == State.Hit and turn == "dealer":
 		var card = deck[selected_card].duplicate()
 		card.suit = deck[selected_card].suit
@@ -249,6 +252,9 @@ func deal_self() -> void:
 		$dealer.get_node("cards").add_child(card)
 		set_top_three()
 		turn = "gangster"
+		
+		$sfx.set_stream(get_node("/root/Globals").deal)
+		$sfx.play()
 		
 	update_scores()
 		
