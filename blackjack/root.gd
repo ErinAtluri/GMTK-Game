@@ -596,6 +596,8 @@ func _on_next_round_button_pressed():
 	if get_node("/root/Globals").house <= 0 or house_wallet <= 0:
 		get_tree().change_scene("res://bankrupt.tscn")
 	else:
+		if get_node("/root/Globals").roun_d >= 21:
+			get_tree().change_scene("res://fail.tscn")
 		get_tree().reload_current_scene()
 	
 func _on_continue_button_pressed():
