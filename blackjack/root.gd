@@ -464,6 +464,9 @@ func hide_cards_after_timeout() -> void:
 		
 	$dealer/cards.hide()
 	
+	if get_node("/root/Globals").house <= 0:
+		get_tree().change_scene("res://bankrupt.tscn")
+	
 func _on_first_button_pressed():
 	if state == State.Deal or state == State.Hit:
 		de_gayify_the_cards()
@@ -582,6 +585,8 @@ func _on_stand_button_pressed():
 					pass
 					
 func _on_next_round_button_pressed():
+	if timer_on:
+		return
 	get_node("/root/Globals").house = house_wallet
 	get_node("/root/Globals").personal = personal_wallet
 	get_node("/root/Globals").roun_d += 1
