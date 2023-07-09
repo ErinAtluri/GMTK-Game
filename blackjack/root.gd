@@ -347,19 +347,22 @@ func hide_cards_after_timeout() -> void:
 	$dealer/cards.hide()
 	
 func _on_first_button_pressed():
-	de_gayify_the_cards()
-	$deal_ui/deck_h_box/first.modulate = WHITE
-	selected_card = 0
+	if state == State.Deal or state == State.Hit:
+		de_gayify_the_cards()
+		$deal_ui/deck_h_box/first.modulate = WHITE
+		selected_card = 0
 	
 func _on_second_button_pressed():
-	de_gayify_the_cards()
-	$deal_ui/deck_h_box/second.modulate = WHITE
-	selected_card = 1
+	if state == State.Deal or state == State.Hit:
+		de_gayify_the_cards()
+		$deal_ui/deck_h_box/second.modulate = WHITE
+		selected_card = 1
 	
 func _on_third_button_pressed():
-	de_gayify_the_cards()
-	$deal_ui/deck_h_box/third.modulate = WHITE
-	selected_card = 2
+	if state == State.Deal or state == State.Hit:
+		de_gayify_the_cards()
+		$deal_ui/deck_h_box/third.modulate = WHITE
+		selected_card = 2
 	
 func _on_swap_button_pressed():
 	var temp_card = null
@@ -456,6 +459,5 @@ func _on_next_round_button_pressed():
 	
 func _on_continue_button_pressed():
 	state = State.Deal
-	
 	$letter.hide()
 	get_node("/root/Globals").letter_shown = true
