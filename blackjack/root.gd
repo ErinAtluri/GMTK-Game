@@ -48,7 +48,7 @@ func _ready():
 	
 	$deal_ui/deck_h_box/first.modulate = WHITE
 	$base_ui/house_wallet.text = "$" + str(house_wallet)
-	$base_ui/personal_wallet.text = "$" + str(personal_wallet)
+	$base_ui/personal_wallet.text = "$" + str(get_node("/root/Globals").personal)
 	
 	if get_node("/root/Globals").letter_shown:
 		state = State.Deal
@@ -264,11 +264,11 @@ func deal_self() -> void:
 			set_top_three()
 			card_count += 1
 			
+			$sfx.set_stream(get_node("/root/Globals").deal)
+			$sfx.play()
+			
 		elif card_count == 7:
 			pass
-			
-		$sfx.set_stream(get_node("/root/Globals").deal)
-		$sfx.play()
 	elif state == State.Hit and turn == "dealer":
 		var card = deck[selected_card].duplicate()
 		card.suit = deck[selected_card].suit
@@ -399,7 +399,7 @@ func payout() -> void:
 				$dialog.add_child(new_dialog)
 			"rich":
 				play_audio(get_node("/root/Globals").ceo_win_sounds)
-				var new_dialog = Dialogic.start("OzoWin" + str((randi() % 3) + 1))
+				var new_dialog = Dialogic.start("FinniganWin" + str((randi() % 3) + 1))
 				$dialog.add_child(new_dialog)
 		
 	if not "gangster" in winners:
@@ -463,9 +463,6 @@ func hide_cards_after_timeout() -> void:
 		patron.get_node("cards").hide()
 		
 	$dealer/cards.hide()
-	
-	if get_node("/root/Globals").house <= 0:
-		get_tree().change_scene("res://bankrupt.tscn")
 	
 func _on_first_button_pressed():
 	if state == State.Deal or state == State.Hit:
@@ -590,6 +587,8 @@ func _on_next_round_button_pressed():
 		return
 	get_node("/root/Globals").house = house_wallet
 	get_node("/root/Globals").personal = personal_wallet
+	if get_node("/root/Globals").house <= 0 or house_wallet <= 0:
+		get_tree().change_scene("res://bankrupt.tscn")
 	get_node("/root/Globals").roun_d += 1
 	if get_node("/root/Globals").roun_d % 3 == 0:
 		get_node("/root/Globals").day_start = true
