@@ -530,10 +530,11 @@ func _on_swap_button_pressed():
 	update_scores()
 	
 func _on_dont_swap_button_pressed():
-	var card = deck[selected_card].duplicate()
-	card.suit = deck[selected_card].suit
-	card.value = deck[selected_card].value
-	deck.remove(selected_card)
+	var card = deck[0].duplicate()
+	card.suit = deck[0].suit
+	card.value = deck[0].value
+	deck.remove(0)
+	set_top_three()
 	$dealer.get_node("cards").add_child(card)
 	$swap_ui.hide()
 	state = State.Bet
@@ -609,10 +610,10 @@ func _on_day_cont_button_pressed():
 	if get_node("/root/Globals").personal >= 8000:
 		get_tree().change_scene("res://win.tscn")
 	if get_node("/root/Globals").ozo_anger == 2:
-			$sfx.set_stream(get_node("/root/Globals").growl)
-			$sfx.play()
-			var new_dialog = Dialogic.start("OzoAnger2.1")
-			$dialog.add_child(new_dialog)
+		$sfx.set_stream(get_node("/root/Globals").growl)
+		$sfx.play()
+		var new_dialog = Dialogic.start("OzoAnger2.1")
+		$dialog.add_child(new_dialog)
 	
 func _on_pause_button_pressed():
 	$pause_popup.show()
